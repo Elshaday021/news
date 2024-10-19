@@ -1,0 +1,15 @@
+D:\Projects\HCMS\HCMS.Service\bin\Debug\net8.0\HCMS.Service.deps.json
+D:\Projects\HCMS\HCMS.Service\bin\Debug\net8.0\HCMS.Service.dll
+D:\Projects\HCMS\HCMS.Service\bin\Debug\net8.0\HCMS.Service.pdb
+D:\Projects\HCMS\HCMS.Service\bin\Debug\net8.0\HCMS.Domain.dll
+D:\Projects\HCMS\HCMS.Service\bin\Debug\net8.0\HCMS.Domain.pdb
+D:\Projects\HCMS\HCMS.Service\obj\Debug\net8.0\HCMS.Service.csproj.AssemblyReference.cache
+D:\Projects\HCMS\HCMS.Service\obj\Debug\net8.0\HCMS.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\HCMS\HCMS.Service\obj\Debug\net8.0\HCMS.Service.AssemblyInfoInputs.cache
+D:\Projects\HCMS\HCMS.Service\obj\Debug\net8.0\HCMS.Service.AssemblyInfo.cs
+D:\Projects\HCMS\HCMS.Service\obj\Debug\net8.0\HCMS.Service.csproj.CoreCompileInputs.cache
+D:\Projects\HCMS\HCMS.Service\obj\Debug\net8.0\HCMS.Ser.D6D59163.Up2Date
+D:\Projects\HCMS\HCMS.Service\obj\Debug\net8.0\HCMS.Service.dll
+D:\Projects\HCMS\HCMS.Service\obj\Debug\net8.0\refint\HCMS.Service.dll
+D:\Projects\HCMS\HCMS.Service\obj\Debug\net8.0\HCMS.Service.pdb
+D:\Projects\HCMS\HCMS.Service\obj\Debug\net8.0\ref\HCMS.Service.dll

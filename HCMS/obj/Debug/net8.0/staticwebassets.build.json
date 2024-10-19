@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "/6UldygJ5f60KDBM98FB1KCXqjYp5EHElHS1uYR+kXQ=",
+  "Source": "HCMS.API",
+  "BasePath": "_content/HCMS.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

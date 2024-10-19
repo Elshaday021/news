@@ -1,0 +1,11 @@
+D:\Projects\HCMS\HCMS.Domain\bin\Debug\net8.0\HCMS.Domain.deps.json
+D:\Projects\HCMS\HCMS.Domain\bin\Debug\net8.0\HCMS.Domain.dll
+D:\Projects\HCMS\HCMS.Domain\bin\Debug\net8.0\HCMS.Domain.pdb
+D:\Projects\HCMS\HCMS.Domain\obj\Debug\net8.0\HCMS.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\HCMS\HCMS.Domain\obj\Debug\net8.0\HCMS.Domain.AssemblyInfoInputs.cache
+D:\Projects\HCMS\HCMS.Domain\obj\Debug\net8.0\HCMS.Domain.AssemblyInfo.cs
+D:\Projects\HCMS\HCMS.Domain\obj\Debug\net8.0\HCMS.Domain.csproj.CoreCompileInputs.cache
+D:\Projects\HCMS\HCMS.Domain\obj\Debug\net8.0\HCMS.Domain.dll
+D:\Projects\HCMS\HCMS.Domain\obj\Debug\net8.0\refint\HCMS.Domain.dll
+D:\Projects\HCMS\HCMS.Domain\obj\Debug\net8.0\HCMS.Domain.pdb
+D:\Projects\HCMS\HCMS.Domain\obj\Debug\net8.0\ref\HCMS.Domain.dll

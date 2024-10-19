@@ -1,0 +1,92 @@
+[
+  {
+    "ContainingType": "HCMS.API.Controllers.AuthenticationController",
+    "Method": "LoginsAsync",
+    "RelativePath": "api/Authentication/LoginUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDto",
+        "Type": "HCMS.Domain.User.Signin.UserLogin",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HCMS.Domain.User.UserNotification.NotifyResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HCMS.API.Controllers.AuthenticationController",
+    "Method": "RegisterUser",
+    "RelativePath": "api/Authentication/RegisterUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userRegister",
+        "Type": "HCMS.Domain.User.Signup.UserRegister",
+        "IsRequired": true
+      },
+      {
+        "Name": "role",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HCMS.API.Controllers.AuthenticationController",
+    "Method": "VerificationCode",
+    "RelativePath": "api/Authentication/verification-code",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "VerificationCode",
+        "Type": "HCMS.Domain.User.UserNotification.VerificationCode",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HCMS.API.Controllers.BusinessUnit.BusinessUnitController",
+    "Method": "CreateBusinessUnit",
+    "RelativePath": "api/BusinessUnit/CreateBusinessUnit",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "HCMS.Application.Features.BusinessUnits.Commands.CreateBusinessUnit.CreateBusinessUnitCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "CreateBusinessUnit"
+  }
+]

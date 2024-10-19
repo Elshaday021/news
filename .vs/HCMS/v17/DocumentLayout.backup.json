@@ -1,0 +1,121 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects\\HCMS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{872B2DD5-CFB7-4E47-8DE1-E7146C9998B3}|HCMS\\HCMS.API.csproj|d:\\projects\\hcms\\hcms\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{872B2DD5-CFB7-4E47-8DE1-E7146C9998B3}|HCMS\\HCMS.API.csproj|solutionrelative:hcms\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{872B2DD5-CFB7-4E47-8DE1-E7146C9998B3}|HCMS\\HCMS.API.csproj|d:\\projects\\hcms\\hcms\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{872B2DD5-CFB7-4E47-8DE1-E7146C9998B3}|HCMS\\HCMS.API.csproj|solutionrelative:hcms\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0DC12041-3227-4497-AE8B-B586C6AC7576}|HCMS.Service\\HCMS.Service.csproj|d:\\projects\\hcms\\hcms.service\\emailservice\\exchange.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0DC12041-3227-4497-AE8B-B586C6AC7576}|HCMS.Service\\HCMS.Service.csproj|solutionrelative:hcms.service\\emailservice\\exchange.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55645186-B3BD-4067-AB5F-4808D7639480}|HCMS.Persistance\\HCMS.Persistance.csproj|d:\\projects\\hcms\\hcms.persistance\\seeddata\\emailtempletseeddata\\userregisteremailseeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55645186-B3BD-4067-AB5F-4808D7639480}|HCMS.Persistance\\HCMS.Persistance.csproj|solutionrelative:hcms.persistance\\seeddata\\emailtempletseeddata\\userregisteremailseeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EE44B97-59E4-4361-89E7-294125A87CEE}|HCMS.Application\\HCMS.Application.csproj|d:\\projects\\hcms\\hcms.application\\features\\useraccount\\useraccountregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EE44B97-59E4-4361-89E7-294125A87CEE}|HCMS.Application\\HCMS.Application.csproj|solutionrelative:hcms.application\\features\\useraccount\\useraccountregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\Projects\\HCMS\\HCMS\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "HCMS\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\Projects\\HCMS\\HCMS\\Properties\\launchSettings.json",
+              "RelativeToolTip": "HCMS\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-19T08:28:22.16Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserRegisterEmailSeedData.cs",
+              "DocumentMoniker": "D:\\Projects\\HCMS\\HCMS.Persistance\\SeedData\\EmailTempletSeedData\\UserRegisterEmailSeedData.cs",
+              "RelativeDocumentMoniker": "HCMS.Persistance\\SeedData\\EmailTempletSeedData\\UserRegisterEmailSeedData.cs",
+              "ToolTip": "D:\\Projects\\HCMS\\HCMS.Persistance\\SeedData\\EmailTempletSeedData\\UserRegisterEmailSeedData.cs",
+              "RelativeToolTip": "HCMS.Persistance\\SeedData\\EmailTempletSeedData\\UserRegisterEmailSeedData.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBMAAACkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:55:35.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Exchange.cs",
+              "DocumentMoniker": "D:\\Projects\\HCMS\\HCMS.Service\\EmailService\\Exchange.cs",
+              "RelativeDocumentMoniker": "HCMS.Service\\EmailService\\Exchange.cs",
+              "ToolTip": "D:\\Projects\\HCMS\\HCMS.Service\\EmailService\\Exchange.cs",
+              "RelativeToolTip": "HCMS.Service\\EmailService\\Exchange.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAIAwwEgAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:25:26.086Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserAccountRegister.cs",
+              "DocumentMoniker": "D:\\Projects\\HCMS\\HCMS.Application\\Features\\UserAccount\\UserAccountRegister.cs",
+              "RelativeDocumentMoniker": "HCMS.Application\\Features\\UserAccount\\UserAccountRegister.cs",
+              "ToolTip": "D:\\Projects\\HCMS\\HCMS.Application\\Features\\UserAccount\\UserAccountRegister.cs",
+              "RelativeToolTip": "HCMS.Application\\Features\\UserAccount\\UserAccountRegister.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAhwBsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:03:55.009Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthenticationController.cs",
+              "DocumentMoniker": "D:\\Projects\\HCMS\\HCMS\\Controllers\\AuthenticationController.cs",
+              "RelativeDocumentMoniker": "HCMS\\Controllers\\AuthenticationController.cs",
+              "ToolTip": "D:\\Projects\\HCMS\\HCMS\\Controllers\\AuthenticationController.cs",
+              "RelativeToolTip": "HCMS\\Controllers\\AuthenticationController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAIAwwDMAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T07:03:36.854Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
