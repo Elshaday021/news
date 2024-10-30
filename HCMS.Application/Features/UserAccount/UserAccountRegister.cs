@@ -1,12 +1,10 @@
 ﻿using HCMS.Application.Features.UserAccount;
 using HCMS.Domain.User;
-using HCMS.Domain.User.Signup;
 using HCMS.Domain.User.UserNotification;
 using HCMS.Service.Models;
 using HCMS.Services.DataService;
 using HCMS.Services.EmailService;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace HCMS.ApplicationLayer.UserAccount
@@ -65,10 +63,6 @@ namespace HCMS.ApplicationLayer.UserAccount
                 .FirstOrDefaultAsync(a => a.EmailType == HCMS.Domain.Enum.EmailTypeEnum.UserAccountRegisterNotificationEnum);
                 if (!result.Succeeded)
                 {
-                    // var errors = result.Errors.Select(e => e.Description).ToList();
-
-                    // Return errors as a response
-                    // return BadRequest(new { Errors = errors });
                     var errors = string.Join(Environment.NewLine, result.Errors.Select(e => e.Description));
 
                     return
@@ -81,7 +75,6 @@ namespace HCMS.ApplicationLayer.UserAccount
                             .Replace("{userRegister.UserEmail} ", registerDto.Email)
                             .Replace("{userRegister.Password} ", password);
 
-                //var msg = new MessageDto(new string[] { userRegister.UserEmail }, "Human Capital Management System User Crediential", populatedTemplate);
                 var msg = new MessageDto
                 {
                     Email = registerDto.Email,

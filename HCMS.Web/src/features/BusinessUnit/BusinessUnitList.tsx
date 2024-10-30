@@ -38,9 +38,6 @@ export const BusinessUnitList = ({
                 <TableCell>Parent BusinessUnit</TableCell>
                 <TableCell> BusinessUnit ID</TableCell>
                 <TableCell> BusinessUnit Type</TableCell>
-                {/* {!suppressActionColumn && (
-                  <TableCell align="center">Actions</TableCell>
-                )} */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -70,16 +67,6 @@ export const BusinessUnitList = ({
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.businessUnitTypeName}
                     </TableCell>
-                    {/* <TableCell
-                      sx={{
-                        whiteSpace: "normal",
-                        wordWrap: "break-word",
-                        verticalAlign: "top",
-                      }}
-                    >
-
-                    </TableCell>
-               */}
                   </TableRow>
                 </Fragment>
               ))}

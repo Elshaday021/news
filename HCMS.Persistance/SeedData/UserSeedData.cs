@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using HCMS.Domain.User;
-using System.Drawing.Text;
 using HCMS.Persistance.DBContext;
 
 namespace SMS.Persistence;

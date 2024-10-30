@@ -1,11 +1,7 @@
 ﻿using HCMS.Services.DataService;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HCMS.Domain.Job;
+
 namespace HCMS.Application.Features.Jobs.JobTitles
 {
     public  class AddJobTitleCommandHandler:IRequestHandler<AddJobTitleCommand,int>

@@ -1,13 +1,10 @@
 import AddIcon from "@mui/icons-material/Add";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { PageHeader } from "../../components/PageHeader";
 import { EmployeeDialog } from "./EmployeeDialog";
-import { useNavigate } from "react-router-dom";
 import { useGetAllEmployeesQuery } from "../../app/api";
 import { EmployeeList } from "./EmployeeList";
-import SetupMenu from "../Job/SetupMenu";
 
 const Header = ({ text }: { text: string }) => (
   <Typography
@@ -20,11 +17,8 @@ const Header = ({ text }: { text: string }) => (
 );
 
 export const EmployeesHome = () => {
-  // const { allocations } = useAllocations();
   const [dialogOpened, setDialogOpened] = useState(false);
   const { data } = useGetAllEmployeesQuery();
-  // const permissions = usePermission();
-  const navigate = useNavigate();
   return (
     <Box>
       <PageHeader title={"Employees"} icon={undefined} />
@@ -35,9 +29,7 @@ export const EmployeesHome = () => {
           startIcon={<AddIcon />}
           onClick={() => {
             setDialogOpened(true);
-            //navigate('/test')
           }}
-          //    disabled={!permissions.canCreateOrUpdateAllocation}
         >
           Add New Employee
         </Button>
@@ -48,7 +40,6 @@ export const EmployeesHome = () => {
           onClose={() => {
             setDialogOpened(false);
           }}
-          // title="Add Allocation"
         />
       )}
       <Box>

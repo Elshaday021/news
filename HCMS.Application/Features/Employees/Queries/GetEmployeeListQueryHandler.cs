@@ -1,14 +1,7 @@
-﻿using HCMS.Application.Features.Jobs.JobTitles;
-using HCMS.Domain;
-using HCMS.Domain.BusinessUnit;
-using HCMS.Services.DataService;
+﻿using HCMS.Services.DataService;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace HCMS.Application.Features.Employees.Queries
 {
@@ -22,7 +15,6 @@ namespace HCMS.Application.Features.Employees.Queries
         }
         public async Task< List<EmployeeDto>> Handle (GetEmployeeListQuery query ,CancellationToken cancellationToken)
         {
-            //return await dataService.Employees.ToListAsync(cancellationToken);
             var employeeList = await dataService.Employees.ToListAsync();
             var newemployeeList = new List<EmployeeDto>();
             var businessUnitList = await dataService.BusinessUnits.ToListAsync();

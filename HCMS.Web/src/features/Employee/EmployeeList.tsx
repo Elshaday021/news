@@ -37,9 +37,6 @@ export const EmployeeList = ({
                 <TableCell>Business Unit</TableCell>
                 <TableCell>Job Title</TableCell>
                 <TableCell>Employee ID</TableCell>
-                {/* {!suppressActionColumn && (
-                  <TableCell align="center">Actions</TableCell>
-                )} */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -69,16 +66,6 @@ export const EmployeeList = ({
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.employeeId}
                     </TableCell>
-                    {/* <TableCell
-                      sx={{
-                        whiteSpace: "normal",
-                        wordWrap: "break-word",
-                        verticalAlign: "top",
-                      }}
-                    >
-
-                    </TableCell>
-               */}
                   </TableRow>
                 </Fragment>
               ))}

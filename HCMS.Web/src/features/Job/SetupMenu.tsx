@@ -1,5 +1,3 @@
-// SetupMenu.tsx
-import React from "react";
 import { Box, Button, Typography, Grid, Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
@@ -9,10 +7,6 @@ import GradeIcon from "@mui/icons-material/Grade";
 
 const SetupMenu = () => {
   const navigate = useNavigate();
-
-  const handleNavigation = (path: string) => {
-    navigate(path);
-  };
 
   return (
     <Box

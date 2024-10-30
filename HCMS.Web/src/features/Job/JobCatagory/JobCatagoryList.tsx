@@ -35,10 +35,6 @@ export const JobCatagoryList = ({
               <TableRow>
                 <TableCell>Name</TableCell>
                 <TableCell>Description</TableCell>
-
-                {/* {!suppressActionColumn && (
-                  <TableCell align="center">Actions</TableCell>
-                )} */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -62,17 +58,6 @@ export const JobCatagoryList = ({
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.description}
                     </TableCell>
-
-                    {/* <TableCell
-                      sx={{
-                        whiteSpace: "normal",
-                        wordWrap: "break-word",
-                        verticalAlign: "top",
-                      }}
-                    >
-
-                    </TableCell>
-               */}
                   </TableRow>
                 </Fragment>
               ))}

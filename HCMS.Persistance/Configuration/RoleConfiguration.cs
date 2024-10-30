@@ -1,5 +1,4 @@
 ﻿using HCMS.Domain;
-using HCMS.Domain.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

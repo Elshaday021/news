@@ -19,7 +19,6 @@ namespace HCMS.Persistance.DBContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //UserRoleSeedData.SeedAsync(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(HCMSDBContext).Assembly);
         }
         public DbSet<BusinessUnit> BusinessUnits { get; set; }

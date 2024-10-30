@@ -1,12 +1,6 @@
 ﻿using HCMS.Domain.BusinessUnit;
 using HCMS.Domain.Enum;
-using HCMS.Domain.Job;
 using HCMS.Persistance.DBContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HCMS.Persistance.SeedData
 {

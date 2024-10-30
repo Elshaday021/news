@@ -13,20 +13,13 @@ import {
   DialogContent,
   Grid,
 } from "@mui/material";
-import {
-  JobGrade,
-  useAddJobCatagoryMutation,
-  useAddJobGradeMutation,
-  useCreateBusinessUnitMutation,
-} from "../../../app/api/HCMSApi";
-
+import { JobGrade, useAddJobGradeMutation } from "../../../app/api/HCMSApi";
 
 const emptyjobGradeData = {
   name: "",
   description: "",
 } as any;
 export const JobGradeDialog = ({ onClose }: { onClose: () => void }) => {
-  // const [open, setOpen] = useState(false);
   const [jobGradeData, setJobGrade] = useState<JobGrade>();
   const [addJobGrade] = useAddJobGradeMutation();
 

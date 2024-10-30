@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
 
-namespace HCMS.Domain
+namespace HCMS.Application.Features
 {
     public class EmployeeDto
     {

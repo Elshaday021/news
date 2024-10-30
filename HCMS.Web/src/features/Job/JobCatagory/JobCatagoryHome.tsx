@@ -62,10 +62,7 @@ export const JobCatagoryHome = () => {
         />
       )}
       <Box>
-        <JobCatagoryList
-          items={data}
-          // suppressActionColumn={!!draft?.length}
-        />
+        <JobCatagoryList items={data} />
       </Box>
     </Box>
   );
