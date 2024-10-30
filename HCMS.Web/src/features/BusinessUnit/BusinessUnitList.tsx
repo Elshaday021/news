@@ -1,0 +1,92 @@
+import {
+  Box,
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
+import { Fragment, useState } from "react";
+import { BusinessUnitDto } from "../../app/api";
+
+interface BusinessUnitListProps {
+  items?: BusinessUnitDto[];
+  hideWorkflowComment?: boolean;
+  suppressActionColumn?: boolean;
+}
+
+export const BusinessUnitList = ({
+  items = [],
+  hideWorkflowComment,
+  suppressActionColumn,
+}: BusinessUnitListProps) => {
+  const [selectedBusinessUnit, setSelectedBusinessUnit] =
+    useState<BusinessUnitDto>();
+
+  return (
+    <Box>
+      <Paper>
+        <TableContainer>
+          <Table size="medium">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Parent BusinessUnit</TableCell>
+                <TableCell> BusinessUnit ID</TableCell>
+                <TableCell> BusinessUnit Type</TableCell>
+                {/* {!suppressActionColumn && (
+                  <TableCell align="center">Actions</TableCell>
+                )} */}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {(items || []).map((item) => (
+                <Fragment key={item.id}>
+                  <TableRow
+                    hover={false}
+                    key={item.id}
+                    sx={
+                      !hideWorkflowComment
+                        ? {
+                            cursor: "pointer",
+                            "& > *": { borderBottom: "unset" },
+                          }
+                        : {}
+                    }
+                  >
+                    <TableCell sx={{ verticalAlign: "top", width: 200 }}>
+                      {item.businessUnitName}
+                    </TableCell>
+                    <TableCell sx={{ verticalAlign: "top", width: 200 }}>
+                      {item.parentBusinessUnit}
+                    </TableCell>
+                    <TableCell sx={{ verticalAlign: "top", width: 200 }}>
+                      {item.businessUnitID}
+                    </TableCell>
+                    <TableCell sx={{ verticalAlign: "top", width: 200 }}>
+                      {item.businessUnitTypeName}
+                    </TableCell>
+                    {/* <TableCell
+                      sx={{
+                        whiteSpace: "normal",
+                        wordWrap: "break-word",
+                        verticalAlign: "top",
+                      }}
+                    >
+
+                    </TableCell>
+               */}
+                  </TableRow>
+                </Fragment>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </Box>
+  );
+};

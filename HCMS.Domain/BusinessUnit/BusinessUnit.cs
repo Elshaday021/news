@@ -9,6 +9,7 @@ namespace HCMS.Domain.BusinessUnit
         public string BusinessUnitID { get; set; }
         public string BusinessUnitName { get; set; }
         public int ParentId { get; set; }
+        public int BusinessUnitType { get; set; }
 
     }
 }

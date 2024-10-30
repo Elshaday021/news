@@ -6,12 +6,11 @@ import { useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const tabs = [
- 
   {
     label: "Business Unit",
     href: "/admin/home",
     icon: <GroupWorkIcon fontSize="small" />,
-  }
+  },
 ];
 export const AdminTabs = () => {
   const { pathname } = useLocation();

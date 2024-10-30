@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HCMS.Domain.Employee
+namespace HCMS.Domain
 {
     public class Employee
     {
-        [Key]
+
         public int Id { get; set; }
         public string EmployeeId { get; set; }
         public string EmployeeName { get; set; }

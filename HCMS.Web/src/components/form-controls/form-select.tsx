@@ -1,6 +1,6 @@
 import { MenuItem, TextField, TextFieldProps } from "@mui/material";
-import { SelectOption } from "../../types";
 import { useField, useFormikContext } from "formik";
+import { SelectOption } from "../../types";
 
 export type { SelectOption };
 
@@ -31,7 +31,7 @@ export const FormSelectField = ({
   };
   return (
     <>
-      {(
+      {
         <TextField {...props}>
           {(options || []).map((item, index) => (
             <MenuItem
@@ -43,7 +43,7 @@ export const FormSelectField = ({
             </MenuItem>
           ))}
         </TextField>
-      ) || null}
+      }
     </>
   );
 };

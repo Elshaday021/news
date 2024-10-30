@@ -1,13 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { ThemeProvider, createTheme } from '@mui/material';
-import { green } from '@mui/material/colors';
-import { HttpClientContextProvider } from '../contexts/HttpClientContextProvider';
-import { MainLayout } from '../components/layouts';
-import { SnackbarProvider } from 'notistack';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { ThemeProvider, createTheme } from "@mui/material";
+import { green } from "@mui/material/colors";
+import { SnackbarProvider } from "notistack";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { MainLayout } from "../components/layouts/MainLayout";
 
 const theme = createTheme({
   palette: {
@@ -51,29 +50,24 @@ const theme = createTheme({
   },
 });
 
-
-export const App=()=> {
+export const App = () => {
   return (
     <ThemeProvider theme={theme}>
-    <SnackbarProvider
-      maxSnack={3}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "center",
-      }}
-      preventDuplicate
-      autoHideDuration={5000}
-    >
-      <HttpClientContextProvider>
-        
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        preventDuplicate
+        autoHideDuration={5000}
+      >
         {/* <ScrollToTop> */}
-        {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
           <MainLayout />
-        {/* </LocalizationProvider> */}
+        </LocalizationProvider>
         {/* </ScrollToTop> */}
-      </HttpClientContextProvider>
-    </SnackbarProvider>
-  </ThemeProvider>
+      </SnackbarProvider>
+    </ThemeProvider>
   );
-}
-
+};

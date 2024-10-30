@@ -1,18 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿//using HCMS.Domain.User;
+//using Microsoft.AspNetCore.Identity;
+//using Microsoft.EntityFrameworkCore;
 
-namespace HCMS.DBPersistance.SeedData
-{
-    public static class UserRoleSeedData
-    {
-        public static void seedRoles(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<IdentityRole>().HasData
-               (
-                new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "ADMIN" }
-                );
-        }
+//namespace HCMS.DBPersistance.SeedData
+//{
+//    public static class UserRoleSeedData
+//    {
+//        public static void SeedAsync(ModelBuilder modelBuilder)
+//        {
+//            modelBuilder.Entity<HRRole>().HasData
+//               (
+//                new HRRole() { Id= "c5b6f6d8-5a49-44ee-976f-4cc00f1c844a",Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "ADMIN",Description="Admin",DisplayName="Admin" }
+//                );
+//        }
 
 
-    }
-}
+//    }
+//}

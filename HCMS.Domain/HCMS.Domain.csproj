@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="JobGrade\" />
+    <Compile Remove="JobGrade\**" />
+    <EmbeddedResource Remove="JobGrade\**" />
+    <None Remove="JobGrade\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
   </ItemGroup>
 
 </Project>

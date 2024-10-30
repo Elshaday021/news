@@ -1,6 +1,10 @@
 import { AppBar, Box, styled, Toolbar, useTheme } from "@mui/material";
 import { useCallback, useState } from "react";
+import { Footer } from "../../main/Footer";
 import { Header } from "../../main/Header";
+import Routes from "../routes";
+import { LeftNav } from "./LeftNav";
+
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Divider from "@mui/material/Divider";
@@ -8,9 +12,6 @@ import IconButton from "@mui/material/IconButton";
 
 import MuiDrawer from "@mui/material/Drawer";
 import { CSSObject, Theme } from "@mui/material/styles";
-import { Footer } from "../../main/Footer";
-import { useAuth } from "../../hooks";
-import Routes from "../routes";
 
 const drawerWidth = 280;
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -60,9 +61,8 @@ const Drawer = styled(MuiDrawer, {
 
 export const MainLayout = () => {
   const theme = useTheme();
-//   useNotification();
+  //useNotification();
   const [open, setOpen] = useState(false);
-   const { loggedIn } = useAuth();
 
   const onMenuClose = useCallback(() => {
     setOpen(false);
@@ -106,23 +106,23 @@ export const MainLayout = () => {
         }}
       >
         <Box sx={{ display: "flex", flex: 1 }}>
-          {loggedIn && (
-            <>
-              <Drawer variant="permanent" open={open}>
-                <DrawerHeader>
-                  <IconButton onClick={handleDrawerClose}>
-                    {theme.direction === "rtl" ? (
-                      <ChevronRightIcon />
-                    ) : (
-                      <ChevronLeftIcon />
-                    )}
-                  </IconButton>
-                </DrawerHeader>
-                <Divider />
-                {/* <LeftNav opened={open} onClose={onMenuClose} /> */}
-              </Drawer>
-            </>
-         )} 
+          {/* {loggedIn && ( */}
+          <>
+            <Drawer variant="permanent" open={open}>
+              <DrawerHeader>
+                <IconButton onClick={handleDrawerClose}>
+                  {theme.direction === "rtl" ? (
+                    <ChevronRightIcon />
+                  ) : (
+                    <ChevronLeftIcon />
+                  )}
+                </IconButton>
+              </DrawerHeader>
+              <Divider />
+              <LeftNav opened={open} onClose={onMenuClose} />
+            </Drawer>
+          </>
+          {/* )} */}
           <MainContainer
             sx={{
               position: "relative",
@@ -133,7 +133,7 @@ export const MainLayout = () => {
           >
             <Box sx={{ flex: 1, display: "flex" }}>
               <Box sx={{ flex: 1, py: 1, px: 2 }}>
-              <Routes />
+                <Routes />
               </Box>
             </Box>
             <Footer />

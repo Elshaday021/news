@@ -7,20 +7,21 @@ export const useAuth = () => {
     //user?: UserDto;
     isLoading?: boolean;
   }>({ loggedIn: false, isLoading: true });
- // const { data, isLoading, isError, isFetching } = useCurrentUserInfoQuery();
+  // const { data, isLoading, isError, isFetching } = useCurrentUserInfoQuery();
 
-  useEffect(() => {
-   // if (!(isLoading || isFetching) && !isError) {
+  useEffect(
+    () => {
+      // if (!(isLoading || isFetching) && !isError) {
       setState({
         loggedIn: true,
-      //  user: data,
+        //  user: data,
         isLoading: false,
       });
-   // }
-   // if (isError) {
-      setState({ loggedIn: false,  isLoading: false });
-   // }
-  }, //[data, isError, isFetching, isLoading]);
-  )
+      // }
+      // if (isError) {
+      setState({ loggedIn: false, isLoading: false });
+      // }
+    } //[data, isError, isFetching, isLoading]);
+  );
   return state;
 };

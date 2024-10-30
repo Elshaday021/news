@@ -32,7 +32,7 @@ export const MFA = () => {
 
   const handleSubmit = useCallback(
     (values: MFAFormFields) => {
-     reset();
+      reset();
       verify({
         verificationCode: {
           code: values.code,
@@ -40,7 +40,7 @@ export const MFA = () => {
       })
         .unwrap()
         .then(() => {
-          navigate("/");
+          navigate("/Home");
         })
         .catch(() => {});
     },

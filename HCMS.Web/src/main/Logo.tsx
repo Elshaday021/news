@@ -13,7 +13,7 @@ export const Logo = ({ height }: { height?: number }) => {
       src={logo}
       alt="Berhan Bank logo."
       onClick={() => {
-        navigate("/");
+        navigate("/Home");
       }}
     />
   );
