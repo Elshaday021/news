@@ -22,7 +22,6 @@ const emptyBusinessUnitData = {
   parentId: "",
 } as any;
 export const BusinessUnitDialog = ({ onClose }: { onClose: () => void }) => {
-  // const [open, setOpen] = useState(false);
   const [businessUnitData, setBusinessUnit] =
     useState<CreateBusinessUnitCommand>();
   const [addBusinessUnit] = useCreateBusinessUnitMutation();

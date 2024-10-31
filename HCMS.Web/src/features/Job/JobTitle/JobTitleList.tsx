@@ -37,9 +37,6 @@ export const JobTitleList = ({
                 <TableCell>Job Catagory</TableCell>
                 <TableCell>Job Grade</TableCell>
                 <TableCell>Description</TableCell>
-                {/* {!suppressActionColumn && (
-                  <TableCell align="center">Actions</TableCell>
-                )} */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -69,16 +66,6 @@ export const JobTitleList = ({
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.description}
                     </TableCell>
-                    {/* <TableCell
-                      sx={{
-                        whiteSpace: "normal",
-                        wordWrap: "break-word",
-                        verticalAlign: "top",
-                      }}
-                    >
-
-                    </TableCell>
-               */}
                   </TableRow>
                 </Fragment>
               ))}

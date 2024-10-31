@@ -24,7 +24,6 @@ const emptyjobCatagoryData = {
   description: "",
 } as any;
 export const JobCatagoryDialog = ({ onClose }: { onClose: () => void }) => {
-  // const [open, setOpen] = useState(false);
   const [jobCatagoryData, setJobCatagory] = useState<JobCatagory>();
   const [addJobCatagory] = useAddJobCatagoryMutation();
 

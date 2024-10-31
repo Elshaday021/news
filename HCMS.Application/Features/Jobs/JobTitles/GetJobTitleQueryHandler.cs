@@ -28,6 +28,7 @@ namespace HCMS.Application.Features.Jobs.JobTitles
                 var jobGrade=jobGradeList.Where(j => ((int)j.Value)==bu.JobGradeId).FirstOrDefault();
                 var jobTitle = new JobTitleDto()
                 {
+                    Id=bu.Id,
                     Title = bu.Title,
                     Description = bu.Description,
                     JobCatagory = jobCatagory.Name,

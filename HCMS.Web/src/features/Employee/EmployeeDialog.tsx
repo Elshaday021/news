@@ -28,7 +28,7 @@ export const EmployeeDialog = ({ onClose }: { onClose: () => void }) => {
   const [EmployeeData, setEmployee] = useState<EmployeeDto>();
   const [addEmployee] = useCreateEmployeeProfileMutation();
   const { businessUnitLookups } = useBusinessUnit();
-  const { JobTitlesLookups } = useJobTitle();
+  const { jobTitlesLookups } = useJobTitle();
   useEffect(() => {
     setEmployee({
       ...emptyEmployeeData,
@@ -95,7 +95,7 @@ export const EmployeeDialog = ({ onClose }: { onClose: () => void }) => {
                         name="jobId"
                         label="Job Title"
                         type="number"
-                        options={JobTitlesLookups}
+                        options={jobTitlesLookups}
                       />
                     </Box>
                   </Grid>

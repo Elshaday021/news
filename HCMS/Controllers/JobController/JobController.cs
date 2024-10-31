@@ -13,8 +13,7 @@ namespace HCMS.API.Controllers.JobController
     [ApiController]
     public class JobController:BaseController<JobController>
     {
-        private readonly IMediator mediator;
-
+ 
         [HttpPost("AddJobGrade",Name ="AddJobGrade")]
         [ProducesResponseType(200)]
         public async Task<ActionResult<string>> AddJobGrade([FromBody]AddJobGradeCommand command)

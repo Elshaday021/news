@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HCMS.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a061c7236fecbda9362f0eda35b6c1be490fe4c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c8e62ab82734a36953b409259e6d663bff8b6a53")]
 [assembly: System.Reflection.AssemblyProductAttribute("HCMS.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HCMS.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

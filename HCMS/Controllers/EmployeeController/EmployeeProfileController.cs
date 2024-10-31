@@ -1,7 +1,7 @@
 ﻿
+using HCMS.Application.Features;
 using HCMS.Application.Features.Employees;
 using HCMS.Application.Features.Employees.Queries;
-using HCMS.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HCMS.API.Controllers.EmployeeController
