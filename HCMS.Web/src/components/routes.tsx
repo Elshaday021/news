@@ -8,12 +8,15 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-
-
 import { useAuth } from "../hooks";
 import { Login, MFA } from "../features/user";
 import { Admin } from "../features/HCMSAdmin";
 import Home from "../Home";
+import { BusinessUnitsHome } from "../features/BusinessUnit";
+import { JobCatagoryHome } from "../features/Job/JobCatagory/JobCatagoryHome";
+import { JobGradeHome } from "../features/Job/JobGrade/JobGradeHome";
+import { JobTitleHome } from "../features/Job/JobTitle/JobTitleHome";
+import { EmployeesHome } from "../features/Employee/EmployeeHome";
 
 const AppRoutes = () => {
   const navigate = useNavigate();
@@ -42,8 +45,17 @@ const AppRoutes = () => {
     <Routes>
       <Route path="login" element={<Login />} />
       <Route path="verify" element={<MFA />} />
-     
+
       <Route path="home" element={<Home />} />
+      <Route path="" element={<Home />} />
+      {/* <Route path="admin" element={<Admin />} /> */}
+      <Route path="businessunit" element={<BusinessUnitsHome />} />
+      <Route path="jobcatagory" element={<JobCatagoryHome />} />
+      <Route path="jobgrade" element={<JobGradeHome />} />
+      <Route path="jobtitle" element={<JobTitleHome />} />
+      <Route path="employees" element={<EmployeesHome />} />
+      {/* <Route path="test" element={<Test />} /> */}
+
       {/* <Route path="forgot-password" element={<ForgotPassword />} />
       <Route element={<AuthenticatedRoutes />}>
         <Route path="/" element={<Navigate to="/shareholders" replace />} />

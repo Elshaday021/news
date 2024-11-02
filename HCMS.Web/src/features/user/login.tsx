@@ -18,7 +18,7 @@ import { Form, Formik } from "formik";
 //import { useAlert } from "../notification";
 import * as yup from "yup";
 import { YupShape } from "../../utils";
-import { useLoginsMutation } from "../../app/api/HCMSApi";
+import { useLoginMutation } from "../../app/api/HCMSApi";
 
 const style: SxProps = {
   position: "absolute",
@@ -49,31 +49,28 @@ const initialValues = {
 };
 
 export const Login = () => {
-  const [loginUser, loginResponse] = useLoginsMutation();
+  const [loginUser, loginResponse] = useLoginMutation();
   //const [sendPwdResetEmail] = useForgotPasswordMutation();
   const [forgotPassword, setForgotPassword] = useState(false);
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
-//  const { showSuccessAlert } = useAlert();
+  //  const { showSuccessAlert } = useAlert();
   const navigate = useNavigate();
-console.log(loginUser);
-console.log(loginResponse);
+  console.log(loginUser);
+  console.log(loginResponse);
   const handleSubmit = useCallback(
     (values: LoginFormFields) => {
       loginUser({ userLogin: values })
         .unwrap()
-        .then(resp=>{
-          navigate("/verify");
-    })
+        .then()
         .catch((e) => {
           if (e?.data?.needVerification) {
             navigate("/verify");
           }
-        }
-      );
+        });
     },
-     [ navigate,loginUser]
+    [navigate, loginUser]
   );
-  
+
   // const onRequestPasswordResetLink = useCallback(() => {
   //   if (forgotPasswordEmail) {
   //     sendPwdResetEmail({
@@ -94,7 +91,7 @@ console.log(loginResponse);
   // }, [forgotPasswordEmail, sendPwdResetEmail, showSuccessAlert]);
 
   return (
-    <Box sx={{ position: "relative", flex: 1, height: "100%",paddingTop:20 }}>
+    <Box sx={{ position: "relative", flex: 1, height: "100%", paddingTop: 20 }}>
       <Paper sx={style} variant="elevation" elevation={2}>
         <Grid container>
           <Grid
@@ -145,7 +142,7 @@ console.log(loginResponse);
                     type="submit"
                     fullWidth
                     className="button-block"
-                   // onClick={onRequestPasswordResetLink}
+                    // onClick={onRequestPasswordResetLink}
                     sx={{ py: 1.5 }}
                     disabled={!forgotPasswordEmail}
                   >
@@ -184,16 +181,16 @@ console.log(loginResponse);
                               Your account is locked out. Please contact PMS
                               team.
                             </Typography>
-                          ) : ( 
+                          ) : (
                             <Typography>
                               {" "}
                               Invalid <strong> email</strong> or{" "}
                               <strong>password.</strong>
                             </Typography>
-                          )} 
+                          )}
                         </Alert>
                       </Grid>
-                  )} 
+                    )}
                     <Grid item xs={12}>
                       <FormTextField
                         id="userEmail"
@@ -214,7 +211,7 @@ console.log(loginResponse);
                         autoComplete="current-password"
                       />
                       <Button
-                         disabled={loginResponse?.isLoading}
+                        disabled={loginResponse?.isLoading}
                         onClick={() => {
                           setForgotPassword(true);
                         }}
@@ -229,7 +226,7 @@ console.log(loginResponse);
                         fullWidth
                         className="button-block"
                         sx={{ py: 1.5 }}
-                         disabled={loginResponse?.isLoading}
+                        disabled={loginResponse?.isLoading}
                       >
                         Login
                       </Button>

@@ -1,6 +1,5 @@
 import { DialogTitle, IconButton } from "@mui/material";
 
-
 export const DialogHeader = ({
   title,
   onClose,

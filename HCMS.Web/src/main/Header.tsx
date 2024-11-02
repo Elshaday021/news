@@ -41,11 +41,11 @@ export const Header = ({
             >
               Menu
             </Button>
-         )}
+          )}
           <Link
             variant="h6"
             component={RouterLink}
-            to="/"
+            to="/Home"
             sx={{ cursor: "pointer", textDecoration: "none", color: "#002a73" }}
           >
             Human Capital Management System (HCMS)
@@ -70,7 +70,6 @@ export const Header = ({
         </Box>
         {loggedIn && (
           <Box sx={{ display: "flex", alignItems: "center" }}>
-           
             <Box
               sx={{
                 display: "flex",
@@ -81,7 +80,7 @@ export const Header = ({
               <Button
                 sx={{ textTransform: "none" }}
                 // disabled={result?.isLoading}
-               // onClick={() => logout()}
+                // onClick={() => logout()}
               >
                 Logout
               </Button>
@@ -92,7 +91,7 @@ export const Header = ({
               {/* <LoggedInUser /> */}
             </Box>
           </Box>
-         )} 
+        )}
       </Box>
       {/* {!!isOpen && <ReportsDialog open={isOpen} onClose={toggle} />} */}
     </>

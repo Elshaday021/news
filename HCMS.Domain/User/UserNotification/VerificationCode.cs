@@ -4,4 +4,5 @@
     {
         public string Code { get; set; }
     }
+    public record LoginRes(bool IsSuccess, bool? NeedVerification = false, bool? IsLockedOut = false);
 }

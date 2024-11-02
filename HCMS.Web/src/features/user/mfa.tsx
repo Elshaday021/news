@@ -5,9 +5,6 @@ import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormTextField } from "../../components/form-controls";
 import { YupShape } from "../../utils";
-//import { useVerificationCodeMutation } from "../../app/api";
-//import { Errors, FormTextField } from "../../components";
-//import { YupShape } from "../../utils";
 import * as yup from "yup";
 import { Errors } from "../../components/Errors";
 import { useVerificationCodeMutation } from "../../app/api/HCMSApi";
@@ -32,7 +29,7 @@ export const MFA = () => {
 
   const handleSubmit = useCallback(
     (values: MFAFormFields) => {
-     reset();
+      reset();
       verify({
         verificationCode: {
           code: values.code,
@@ -40,7 +37,7 @@ export const MFA = () => {
       })
         .unwrap()
         .then(() => {
-          navigate("/");
+          navigate("/Home");
         })
         .catch(() => {});
     },

@@ -6,9 +6,15 @@ using HCMS.Domain.User.UserNotification;
 using HCMS.Service.Models;
 using HCMS.Services.DataService;
 using HCMS.Services.EmailService;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using HCMS.Domain.User;
+using Microsoft.AspNetCore.Authorization;
+using HCMS.Application.Features.UserAccount;
 
 namespace HCMS.API.Controllers
 {
@@ -18,24 +24,27 @@ namespace HCMS.API.Controllers
     {
         private readonly IExchangeEmail _emailService;
         private readonly IUserAccount _userAccount;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<HRUser> userManager;
+        private readonly SignInManager<HRUser> _signInManager;
+        private readonly RoleManager<HRRole> roleManager;
         private readonly IDataService _dataservice;
+        private readonly ILogger<AuthenticationController> logger;
         public AuthenticationController(IExchangeEmail emailService, IDataService dataService,
-            SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, IUserAccount userAccount)
+            SignInManager<HRUser> signInManager, UserManager<HRUser> userManager, IUserAccount userAccount, ILogger<AuthenticationController> logger)
         {
             this._emailService = emailService;
             this._userAccount = userAccount;
-            this._userManager = userManager;
+            this.userManager = userManager;
             this._signInManager = signInManager;
             this._dataservice = dataService;
+            this.logger = logger;
         }
 
         [HttpPost("RegisterUser")]
-        public async Task<ActionResult> RegisterUser([FromBody] UserRegister userRegister, string role)
+        public async Task<ActionResult> RegisterUser(UserRegisterDto registerDto)
         {
 
-            var userResult = await _userAccount.CreateUser(userRegister, role);
+            var userResult = await _userAccount.CreateUser(registerDto);
             if (userResult.Status != "Success")
             {
                 return StatusCode(StatusCodes.Status403Forbidden,
@@ -45,83 +54,138 @@ namespace HCMS.API.Controllers
 
         }
 
-        [HttpPost("LoginUser")]
-        public async Task<ActionResult<NotifyResponse>> LoginsAsync([FromBody] UserLogin loginDto)
+        private bool IsLockedOut(HRUser user) => user.IsDeactivated || (user.LockoutEnd != null && user.LockoutEnd >= DateTime.UtcNow);
+
+        [AllowAnonymous]
+        [HttpPost("login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<LoginRes>> Login(UserLogin loginDto, string returnUrl = null)
         {
-            var userExist = await _userManager.FindByEmailAsync(loginDto.UserEmail);
-            if (userExist == null)
-            {
-                return new NotifyResponse { Status = "Error", Message = "User Exist App" };
+            returnUrl = returnUrl ?? Url.Content("~/");
+            var user = await userManager.FindByEmailAsync(loginDto.UserEmail);
 
+            if (user == null)
+            {
+                return BadRequest();
             }
 
-            var isPasswordCorrect = await _userManager.CheckPasswordAsync(userExist, loginDto.Password);
-            if (isPasswordCorrect)
+            if (user.IsDeactivated || IsLockedOut(user))
             {
-                await _userManager.UpdateSecurityStampAsync(userExist);
-                var token = await this._userManager.GenerateTwoFactorTokenAsync(userExist, "Email");
+                return BadRequest(new LoginRes(false, false, true));
+            }
 
-                var emailTemplet = await _dataservice.EmailTemplet
-                    .FirstOrDefaultAsync(a => a.EmailRegisterEnum == EmailTypeEnum.UserLoginNotificationEnum);
-                var populatedTemplate = emailTemplet.EmailMessage
-                            .Replace("{userRegister.UserName}", userExist.UserName)
-                            .Replace("{userRegister.UserEmail} ", token);
+            var result = await _signInManager.PasswordSignInAsync(loginDto.UserEmail, loginDto.Password, false, true);
 
-                var msg = new MessageDto
+            if (!result.Succeeded)
+            {
+                if (result.IsLockedOut)
+                    return BadRequest(new LoginRes(false, false, true));
+
+                if (result.RequiresTwoFactor)
                 {
-                    Email = loginDto.UserEmail,
-                    EmailSubject = "Sign in Verification Code",
-                    MessageContent = populatedTemplate
-                };
+                    await userManager.UpdateSecurityStampAsync(user);
+                    var token = await this.userManager.GenerateTwoFactorTokenAsync(user, "Email");
 
-                // (new string[] { loginDto.UserEmail }, "Sign in Verification Code", populatedTemplate);
+                    var emailTemplet = await _dataservice.EmailTemplates
+                        .FirstOrDefaultAsync(a => a.EmailType == EmailTypeEnum.UserLoginNotificationEnum);
+                    var populatedTemplate = emailTemplet.EmailMessage
+                                .Replace("{userRegister.UserName}", user.UserName)
+                                .Replace("{userRegister.UserEmail} ", token);
 
-                _emailService.SendEmails(msg);
+                    var msg = new MessageDto
+                    {
+                        Email = loginDto.UserEmail,
+                        EmailSubject = "Sign in Verification Code",
+                        MessageContent = populatedTemplate
+                    };
 
-                return Ok(new NotifyResponse { Status = "Success", Message = "2FA Code Sent" });
+                    return BadRequest(new LoginRes(false, true, false));
+                }
+
+                return BadRequest(new LoginRes(false));
+
             }
-            return Unauthorized(new NotifyResponse { Status = "Error", Message = "Invalid email or password." });
 
+            await SignInAsync(user);
+
+            return Ok(new LoginRes(true));
         }
 
-
+        
         [HttpPost("verification-code")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [AllowAnonymous]
         public async Task<ActionResult> VerificationCode([FromBody] VerificationCode VerificationCode)
         {
             if (string.IsNullOrWhiteSpace(VerificationCode?.Code)) return BadRequest();
 
             var result = await _signInManager.TwoFactorSignInAsync("Email", VerificationCode.Code, false, false);
+                logger.LogInformation("Sign-in attempt result: Succeeded={Succeeded}, IsLockedOut={IsLockedOut}",
+         result.Succeeded, result.IsLockedOut);
 
-            if (!result.Succeeded)
-            {
-                if (result.IsLockedOut)
+                if (!result.Succeeded)
                 {
-                    return BadRequest();
+                    if (result.IsLockedOut)
+                    {
+                        logger.LogWarning("User is locked out.");
+                        return BadRequest(new LoginRes(false, false, true));
+                    }
+
+                    logger.LogWarning("Invalid verification code.");
+                    return BadRequest(new LoginRes(false, true, false));
                 }
-                return BadRequest();
+
+                var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+            await SignInAsync(user);
+            return Ok(new LoginRes(true));
+           
+        }
+            private ClaimsIdentity GetClaimIdentity(HRUser user, List<Claim> userClaims)
+            {
+                var claimsIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
+
+                var claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id),
+                    new Claim(ClaimTypes.Name, user?.FirstName  ??""),
+                    new Claim("middle_name", user?.MiddleName ??""),
+                    new Claim(ClaimTypes.Surname, user?.LastName ??""),
+                    new Claim(ClaimTypes.Email, user?.Email ??"")
+                };
+                claimsIdentity.AddClaims(claims);
+
+                if (userClaims?.Count() > 0)
+                {
+                    claimsIdentity.AddClaims(userClaims);
+                }
+
+                return claimsIdentity;
             }
 
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-            //await SignInAsync(user);
-            return Ok();
-        }
 
+            private async Task SignInAsync(HRUser user)
+            {
+                var claims = (await userManager.GetClaimsAsync(user))?.ToList();
+                var roles = await userManager.GetRolesAsync(user);
 
+                foreach (var roleName in roles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, roleName));
+                    //var role = await roleManager.FindByNameAsync(roleName);
+                    //if (role != null)
+                      //  claims.AddRange(await roleManager.GetClaimsAsync(role));
 
+                }
+                 await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(GetClaimIdentity(user, claims ?? new List<Claim>())));
 
+                //logger.LogInformation("User {Email} ({FirstName} {MiddleName} {LastName}) logged in at {Time}.",
+                  // user.Email, user.FirstName ?? "", user.MiddleName ?? "", user.LastName ?? "", DateTime.Now);
+            }
 
-
-
-
-
-        //[HttpGet("Email")]
-        //public IActionResult TestEmails()
-        //{
-        //    var msg = new Messages(new string[] { "Tsegaw.Alemayehu@berhanbanksc.com" }, "Test", "This is test mail");
-        //    _emailService.sendEmail(msg);
-        //    return StatusCode(StatusCodes.Status200OK,
-        //   new NotifyResponse { Status = "Success", Message = "Email Sent" });
-
-        //}
     }
 }
