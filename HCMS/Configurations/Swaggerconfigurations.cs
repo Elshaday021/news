@@ -1,4 +1,6 @@
-﻿using Swashbuckle.AspNetCore.Filters;
+﻿using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace HCMS.API.Configurations
 {
@@ -14,6 +16,11 @@ namespace HCMS.API.Configurations
                 opt.OrderActionsBy(x => x.RelativePath);
                 opt.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
                 opt.OperationFilter<SecurityRequirementsOperationFilter>();
+                opt.MapType<DateOnly>(() => new OpenApiSchema
+                {
+                    Type = "string",
+                    Format = "date"
+                });
             });
 
             return services;

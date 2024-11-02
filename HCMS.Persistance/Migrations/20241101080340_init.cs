@@ -11,6 +11,9 @@ namespace HCMS.Persistance.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateSequence<int>(
+                name: "EmployeeId");
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -64,12 +67,28 @@ namespace HCMS.Persistance.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BusinessUnitID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BusinessUnitName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ParentId = table.Column<int>(type: "int", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ParentId = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    AreaCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BusinessUnits", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BusinessUnitTypes",
+                columns: table => new
+                {
+                    Value = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BusinessUnitTypes", x => x.Value);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,10 +110,14 @@ namespace HCMS.Persistance.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmployeeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR EMPLOYEEID"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BusinessUnitID = table.Column<int>(type: "int", nullable: false),
-                    JobId = table.Column<int>(type: "int", nullable: false)
+                    JobTitleId = table.Column<int>(type: "int", nullable: false),
+                    BirthDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    EmployementDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    MartialStatus = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -140,6 +163,22 @@ namespace HCMS.Persistance.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Jobs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobTitles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    JobCatagoryId = table.Column<int>(type: "int", nullable: false),
+                    JobGradeId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobTitles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -309,6 +348,13 @@ namespace HCMS.Persistance.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_EmployeeId",
+                table: "Employees",
+                column: "EmployeeId",
+                unique: true)
+                .Annotation("SqlServer:Clustered", false);
         }
 
         /// <inheritdoc />
@@ -333,6 +379,9 @@ namespace HCMS.Persistance.Migrations
                 name: "BusinessUnits");
 
             migrationBuilder.DropTable(
+                name: "BusinessUnitTypes");
+
+            migrationBuilder.DropTable(
                 name: "EmailTemplates");
 
             migrationBuilder.DropTable(
@@ -348,6 +397,9 @@ namespace HCMS.Persistance.Migrations
                 name: "Jobs");
 
             migrationBuilder.DropTable(
+                name: "JobTitles");
+
+            migrationBuilder.DropTable(
                 name: "JobTypes");
 
             migrationBuilder.DropTable(
@@ -355,6 +407,9 @@ namespace HCMS.Persistance.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropSequence(
+                name: "EmployeeId");
         }
     }
 }

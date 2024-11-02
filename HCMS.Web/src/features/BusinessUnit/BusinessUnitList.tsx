@@ -34,10 +34,10 @@ export const BusinessUnitList = ({
           <Table size="medium">
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Parent BusinessUnit</TableCell>
-                <TableCell> BusinessUnit ID</TableCell>
-                <TableCell> BusinessUnit Type</TableCell>
+                <TableCell sx={{fontWeight: 'bold'}}>Name</TableCell>
+                <TableCell sx={{fontWeight: 'bold'}}>Parent BusinessUnit</TableCell>
+                <TableCell sx={{fontWeight: 'bold'}}> BusinessUnit ID</TableCell>
+                <TableCell sx={{fontWeight: 'bold'}}> BusinessUnit Type</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -56,7 +56,7 @@ export const BusinessUnitList = ({
                     }
                   >
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
-                      {item.businessUnitName}
+                      {item.name}
                     </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.parentBusinessUnit}
@@ -65,7 +65,7 @@ export const BusinessUnitList = ({
                       {item.businessUnitID}
                     </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
-                      {item.businessUnitTypeName}
+                      {item.type}
                     </TableCell>
                   </TableRow>
                 </Fragment>

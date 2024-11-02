@@ -18,6 +18,9 @@ import {
 } from "../../app/api/HCMSApi";
 import { useBusinessUnit } from "../BusinessUnit/useBusinessUnits";
 import { useJobTitle } from "../Job/JobTitle/useJobTitle";
+import { enums } from "../../app/api";
+import dayjs from "dayjs";
+import { removeEmptyFields } from "../../utils";
 
 const emptyEmployeeData = {
   employeeName: "",
@@ -25,7 +28,7 @@ const emptyEmployeeData = {
 } as any;
 export const EmployeeDialog = ({ onClose }: { onClose: () => void }) => {
   // const [open, setOpen] = useState(false);
-  const [EmployeeData, setEmployee] = useState<EmployeeDto>();
+  const [EmployeeData, setEmployee] = useState<CreateEmployeeProfileCommand>();
   const [addEmployee] = useCreateEmployeeProfileMutation();
   const { businessUnitLookups } = useBusinessUnit();
   const { jobTitlesLookups } = useJobTitle();
@@ -38,9 +41,13 @@ export const EmployeeDialog = ({ onClose }: { onClose: () => void }) => {
 
   const handleSubmit = useCallback(
     (values: CreateEmployeeProfileCommand) => {
+      const birthDate = dayjs(values.birthDate).format("YYYY-MM-DD");
+      const employementDate = values.employementDate && dayjs(values.employementDate).format("YYYY-MM-DD");
+
+      const payload = removeEmptyFields({ ...values, birthDate, employementDate });
       addEmployee({
-        createEmployeeProfileCommand: values,
-      })
+        createEmployeeProfileCommand: payload,
+      }) 
         .unwrap()
         .then(onClose);
     },
@@ -72,11 +79,59 @@ export const EmployeeDialog = ({ onClose }: { onClose: () => void }) => {
                 )} */}
 
                 <Grid item xs={12}>
-                  <FormTextField
-                    name="employeeName"
-                    label="Employee Full Name"
-                    type="text"
-                  />
+                  <Box sx={{ display: "flex", gap: 1 }}>
+                    <FormTextField
+                      name="name"
+                      label="Employee Full Name"
+                      type="text"
+                    />
+                    <FormTextField
+                      name="birthDate"
+                      label="Birth Date"
+                      type="date"
+                    />
+                  </Box>
+                </Grid>
+                <Grid item xs={24}>
+                  <Box sx={{ display: "flex", gap: 1 }}>
+                    <FormSelectField
+                      name="gender"
+                      label="Gender"
+                      options={[
+                        {
+                          label: "Male",
+                          value: enums.Gender.Male,
+                        },
+                        {
+                          label: "Female",
+                          value: enums.Gender.Female,
+                        },
+                      ]}
+                    />
+
+                    <FormSelectField
+                      name="martialStatus"
+                      label="Martial Status"
+                      options={[
+                        {
+                          label: "Single",
+                          value: enums.MartialStatus.Single,
+                        },
+                        {
+                          label: "Married",
+                          value: enums.MartialStatus.Married,
+                        },
+                        {
+                          label: "Widowed",
+                          value: enums.MartialStatus.Divorced,
+                        },
+                        {
+                          label: "Widowed",
+                          value: enums.MartialStatus.Widowed,
+                        },
+                      ]}
+                    />
+                  </Box>
                 </Grid>
                 <Grid item xs={12}>
                   <Grid item xs={12}>
@@ -87,23 +142,20 @@ export const EmployeeDialog = ({ onClose }: { onClose: () => void }) => {
                         type="number"
                         options={businessUnitLookups}
                       />
-                    </Box>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Box sx={{ display: "flex", gap: 2 }}>
                       <FormSelectField
-                        name="jobId"
+                        name="jobTitleId"
                         label="Job Title"
                         type="number"
                         options={jobTitlesLookups}
                       />
                     </Box>
                   </Grid>
+
                   <Grid item xs={12}>
                     <FormTextField
-                      name="employeeID"
-                      label="EmployeeID"
-                      type="text"
+                      name="employementDate"
+                      label="Employment Date"
+                      type="date"
                     />
                   </Grid>
                 </Grid>

@@ -1,4 +1,5 @@
-﻿using HCMS.Services.DataService;
+﻿using HCMS.Domain.Enums;
+using HCMS.Services.DataService;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,14 +24,17 @@ namespace HCMS.Application.Features.Employees.Queries
             {
 
                 var businessUnit = businessUnitList.Where(bu => bu.Id == emp.BusinessUnitID).FirstOrDefault();
-                var jobTitle = jobTitleList.Where(j => j.Id== emp.JobId).FirstOrDefault();
-
+                var jobTitle = jobTitleList.Where(j => j.Id== emp.JobTitleId).FirstOrDefault();
                 var employee = new EmployeeDto()
                 {
-                    EmployeeName = emp.EmployeeName,
+                    EmployeeName = emp.Name,
                     EmployeeId = emp.EmployeeId,
-                    BusinessUnit = businessUnit.BusinessUnitName,
+                    BusinessUnit = businessUnit.Name,
                     JobTitle = jobTitle.Title,
+                    BirthDate=emp.BirthDate,
+                    EmployementDate=emp.EmployementDate,
+                    MartialStatus=emp.MartialStatus,
+                    Gender=emp.Gender,
                 };
                 newemployeeList.Add(employee);
             }

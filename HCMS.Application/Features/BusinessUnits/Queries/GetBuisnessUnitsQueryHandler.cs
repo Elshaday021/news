@@ -20,14 +20,16 @@ namespace HCMS.Application.Features.BusinessUnits.Queries
             var newBusinessUnitList = new List<BusinessUnitDto>();
             foreach (var bu in businessUnitList) {
                 var parentBusinessUnit= businessUnitList.Where(b=>b.Id==bu.ParentId).FirstOrDefault();
-                var businessUnitTypeInfo = businessUnitType.Where(b => ((int)b.Value) == bu.BusinessUnitType).FirstOrDefault();
+                var businessUnitTypeInfo = businessUnitType.Where(b => ((int)b.Value) == bu.Type).FirstOrDefault();
                 var businessUnit = new BusinessUnitDto()
                 {  
                     Id = bu.Id,
-                    BusinessUnitName = bu.BusinessUnitName,
+                    Name = bu.Name,
                     BusinessUnitID = bu.BusinessUnitID,
-                    ParentBusinessUnit = parentBusinessUnit.BusinessUnitName,
-                    BusinessUnitTypeName = businessUnitTypeInfo.Name
+                    ParentBusinessUnit = parentBusinessUnit.Name,
+                    Type = businessUnitTypeInfo.Name,
+                    AreaCode= bu.AreaCode,
+                    Addres=bu.Address
 
                 };
                 newBusinessUnitList.Add(businessUnit);

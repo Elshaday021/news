@@ -33,10 +33,14 @@ export const EmployeeList = ({
           <Table size="medium">
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Business Unit</TableCell>
-                <TableCell>Job Title</TableCell>
-                <TableCell>Employee ID</TableCell>
+              <TableCell sx={{fontWeight: 'bold'}}>Employee ID</TableCell>
+                <TableCell sx={{fontWeight: 'bold'}}>Name</TableCell>
+                <TableCell sx={{fontWeight: 'bold'}}>Business Unit</TableCell>
+                <TableCell sx={{fontWeight: 'bold'}}>Job Title</TableCell>
+                <TableCell sx={{fontWeight: 'bold'}}>Gender</TableCell>
+                 <TableCell sx={{fontWeight: 'bold'}}>BirthDate</TableCell>
+                <TableCell sx={{fontWeight: 'bold'}}>Employement Date</TableCell> 
+                <TableCell sx={{fontWeight: 'bold'}}>Martial Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -54,6 +58,9 @@ export const EmployeeList = ({
                         : {}
                     }
                   >
+                          <TableCell sx={{ verticalAlign: "top", width: 200 }}>
+                      {item.employeeId}
+                    </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.employeeName}
                     </TableCell>
@@ -63,8 +70,18 @@ export const EmployeeList = ({
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.jobTitle}
                     </TableCell>
+              
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
-                      {item.employeeId}
+                      {item.gender}
+                    </TableCell>
+                    <TableCell sx={{ verticalAlign: "top", width: 200 }}>
+                      {item.birthDate}
+                    </TableCell>
+                    <TableCell sx={{ verticalAlign: "top", width: 200 }}>
+                      {item.employementDate}
+                    </TableCell>
+                    <TableCell sx={{ verticalAlign: "top", width: 200 }}>
+                      {item.martialStatus}
                     </TableCell>
                   </TableRow>
                 </Fragment>

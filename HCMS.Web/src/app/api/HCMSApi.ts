@@ -186,29 +186,41 @@ export type VerificationCode = {
 export type BusinessUnitDto = {
   id?: number;
   businessUnitID?: string | null;
-  businessUnitName?: string | null;
+  name?: string | null;
   parentBusinessUnit?: string | null;
   parentBusinessUnitID?: number;
-  businessUnitTypeName?: string | null;
+  type?: string | null;
+  areaCode?: string | null;
+  addres?: string | null;
 };
 export type CreateBusinessUnitCommand = {
-  businessUnitID?: string | null;
   businessUnitName?: string | null;
   parentId?: number;
   businessUnitTypeId?: number;
+  areaCode?: string | null;
+  address?: string | null;
 };
+export type Gender = 1 | 2;
+export type MartialStatus = 1 | 2 | 3 | 4;
 export type CreateEmployeeProfileCommand = {
-  employeeId?: string | null;
-  employeeName?: string | null;
+  name?: string | null;
   businessUnitID?: number;
-  jobId?: number;
+  jobTitleId?: number;
+  birthDate?: string;
+  employementDate?: string;
+  gender?: Gender;
+  martialStatus?: MartialStatus;
 };
 export type EmployeeDto = {
   id?: number;
-  employeeId?: string | null;
+  employeeId?: number;
   employeeName?: string | null;
   businessUnit?: string | null;
   jobTitle?: string | null;
+  birthDate?: string;
+  employementDate?: string;
+  gender?: Gender;
+  martialStatus?: MartialStatus;
 };
 export type AddJobCatagoryCommand = {
   name?: string | null;

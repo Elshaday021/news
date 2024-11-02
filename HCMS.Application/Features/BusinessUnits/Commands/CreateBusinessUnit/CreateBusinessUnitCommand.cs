@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HCMS.Application.Features.BusinessUnits.Commands.CreateBusinessUnit
 {
-    public record CreateBusinessUnitCommand(string BusinessUnitID, string BusinessUnitName, int ParentId, int businessUnitTypeId) : IRequest<int>;
+    public record CreateBusinessUnitCommand( string BusinessUnitName, int ParentId, int businessUnitTypeId, string AreaCode ,string Address ) : IRequest<int>;
 
     public class CreateBusinessUnitCommandHandler : IRequestHandler<CreateBusinessUnitCommand, int>
     {
@@ -25,13 +25,15 @@ namespace HCMS.Application.Features.BusinessUnits.Commands.CreateBusinessUnit
             var businessUnit = new BusinessUnit()
             {
                 BusinessUnitID = string.Concat(
-                        new string(gParentBusinessUnit.BusinessUnitName.Take(5).ToArray()), "/",
-                        new string(parentBuisnessUnit.BusinessUnitName.Take(5).ToArray()), "/",   
+                        new string(gParentBusinessUnit.Name.Take(5).ToArray()), "/",
+                        new string(parentBuisnessUnit.Name.Take(5).ToArray()), "/",   
                         new string(request.BusinessUnitName.Take(5).ToArray())   
                     ),
-                BusinessUnitName = request.BusinessUnitName,
+                Name = request.BusinessUnitName,
                 ParentId = request.ParentId,
-                BusinessUnitType=request.businessUnitTypeId
+                Type=request.businessUnitTypeId,
+                AreaCode=request.AreaCode,
+                Address=request.Address,
             };
 
             dataService.BusinessUnits.Add(businessUnit);

@@ -85,11 +85,7 @@ export const BusinessUnitDialog = ({ onClose }: { onClose: () => void }) => {
                       type="number"
                       options={businessUnitTypeLookups}
                     />
-                  </Box>
-                </Grid>
-                <Grid item xs={12}>
-                  <Box sx={{ display: "flex", gap: 2 }}>
-                    <FormSelectField
+                                        <FormSelectField
                       name="parentId"
                       label="Parent Business Unit"
                       type="number"
@@ -100,11 +96,18 @@ export const BusinessUnitDialog = ({ onClose }: { onClose: () => void }) => {
 
                 <Grid item xs={12}>
                   <FormTextField
-                    name="businessUnitID"
+                    name="areaCode"
                     label="Business Unit Area Code"
                     type="text"
                   />
                 </Grid>
+                <Grid item xs={12}>
+                <FormTextField
+                    name="address"
+                    label="Business Unit Address"
+                    type="text"
+                  />
+                  </Grid>
               </Grid>
             </DialogContent>
             <DialogActions sx={{ p: 2 }}>

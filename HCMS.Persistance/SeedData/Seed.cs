@@ -23,6 +23,7 @@ namespace HCMS.Persistance.SeedData
             await EmailTempleteSeedData.SeedAsync(context);
             await UserSeedData.SeedAsync (userManager,context);
             await BusinessUnitTypeSeedData.SeedAsync(context);
+            await BusinessUnitSeedData.SeedAsync(context);
             await context.SaveChangesAsync ();
 
         }

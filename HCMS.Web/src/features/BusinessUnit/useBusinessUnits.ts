@@ -7,8 +7,8 @@ export const useBusinessUnit = () => {
 
   const { businessUnitLookups, branches } = useMemo(() => {
     const businessUnitLookups = (data?.businessUnits || []).map<SelectOption>(
-      ({ id, businessUnitName, businessUnitID }) => ({
-        label: businessUnitName || businessUnitID || "",
+      ({ id, name, businessUnitID }) => ({
+        label: name || businessUnitID || "",
         value: id,
       })
     );

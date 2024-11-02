@@ -20,6 +20,7 @@ namespace HCMS.Persistance.DBContext
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(HCMSDBContext).Assembly);
+            modelBuilder.HasSequence<int>("EmployeeId");
         }
         public DbSet<BusinessUnit> BusinessUnits { get; set; }
         public DbSet<Employee> Employees { get; set; }
