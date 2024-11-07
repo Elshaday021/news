@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Folder Include="Features\BusinessUnits\Commands\UpdateBusinessUnit\" />
+    <Folder Include="Features\Jobs\Job\Model\" />
+    <Folder Include="Features\Jobs\Job\Query\" />
   </ItemGroup>
 
   <ItemGroup>

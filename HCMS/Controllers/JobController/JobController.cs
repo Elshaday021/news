@@ -1,4 +1,5 @@
-﻿using HCMS.Application.Features.Jobs.JobCatagories;
+﻿using HCMS.Application.Features.Jobs.Command;
+using HCMS.Application.Features.Jobs.JobCatagories;
 using HCMS.Application.Features.Jobs.JobGrades;
 using HCMS.Application.Features.Jobs.JobTitles;
 using HCMS.Domain.Job;
@@ -8,17 +9,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HCMS.API.Controllers.JobController
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
-    public class JobController:BaseController<JobController>
+    public class JobController : BaseController<JobController>
     {
- 
-        [HttpPost("AddJobGrade",Name ="AddJobGrade")]
+
+        [HttpPost("AddJobGrade", Name = "AddJobGrade")]
         [ProducesResponseType(200)]
-        public async Task<ActionResult<string>> AddJobGrade([FromBody]AddJobGradeCommand command)
+        public async Task<ActionResult<string>> AddJobGrade([FromBody] AddJobGradeCommand command)
         {
-            var jobGrade=await mediator.Send(command);
+            var jobGrade = await mediator.Send(command);
             return (jobGrade);
         }
         [HttpPost("AddJobTitle", Name = "AddJobTitle")]
@@ -56,5 +57,13 @@ namespace HCMS.API.Controllers.JobController
             var searchResult = await mediator.Send(new GetJobCatagoryQuery());
             return searchResult;
         }
+
+        [HttpPost("AddJob", Name = "AddJob")]
+        public async Task<ActionResult<int>> AddJob ([FromBody] AddJobCommand command)
+        {
+            var addJob = await mediator.Send(command);
+            return addJob;
+        }
+        
     };
 }

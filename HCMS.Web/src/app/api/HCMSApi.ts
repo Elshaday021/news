@@ -58,6 +58,13 @@ const injectedRtkApi = api.injectEndpoints({
     >({
       query: () => ({ url: `/api/EmployeeProfile/all` }),
     }),
+    addJob: build.mutation<AddJobApiResponse, AddJobApiArg>({
+      query: (queryArg) => ({
+        url: `/api/Job/AddJob`,
+        method: "POST",
+        body: queryArg.addJobCommand,
+      }),
+    }),
     addJobCatagory: build.mutation<
       AddJobCatagoryApiResponse,
       AddJobCatagoryApiArg
@@ -134,6 +141,10 @@ export type CreateEmployeeProfileApiArg = {
 export type GetAllEmployeesApiResponse =
   /** status 200 Success */ EmployeeDto[];
 export type GetAllEmployeesApiArg = void;
+export type AddJobApiResponse = /** status 200 Success */ number;
+export type AddJobApiArg = {
+  addJobCommand: AddJobCommand;
+};
 export type AddJobCatagoryApiResponse = /** status 200 Success */ number;
 export type AddJobCatagoryApiArg = {
   addJobCatagoryCommand: AddJobCatagoryCommand;
@@ -199,6 +210,7 @@ export type CreateBusinessUnitCommand = {
   businessUnitTypeId?: number;
   areaCode?: string | null;
   address?: string | null;
+  staffStrength?: number | null;
 };
 export type Gender = 1 | 2;
 export type MartialStatus = 1 | 2 | 3 | 4;
@@ -221,6 +233,10 @@ export type EmployeeDto = {
   employementDate?: string;
   gender?: Gender;
   martialStatus?: MartialStatus;
+};
+export type AddJobCommand = {
+  jobTitleID?: number;
+  businessunitId?: number;
 };
 export type AddJobCatagoryCommand = {
   name?: string | null;
@@ -279,6 +295,7 @@ export const {
   useCreateEmployeeProfileMutation,
   useGetAllEmployeesQuery,
   useLazyGetAllEmployeesQuery,
+  useAddJobMutation,
   useAddJobCatagoryMutation,
   useAddJobGradeMutation,
   useAddJobTitleMutation,

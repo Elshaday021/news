@@ -51,6 +51,9 @@ namespace HCMS.Persistance.Migrations
                     b.Property<int>("ParentId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("StaffStrength")
+                        .HasColumnType("int");
+
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -148,14 +151,10 @@ namespace HCMS.Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int>("BusinessUnitId")
                         .HasColumnType("int");
 
-                    b.Property<string>("JobDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("JobTypeId")
+                    b.Property<int>("JobTitleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

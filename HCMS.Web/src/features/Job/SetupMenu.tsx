@@ -19,14 +19,14 @@ const SetupMenu = () => {
         justifyContent: "center",
       }}
     >
-      <Grid container spacing={6}>
-        <Grid item xs={6} sm={6} md={3}>
+      <Grid container spacing={2}>
+        <Grid item xs={4} sm={4} md={2}>
           <Paper
             onClick={() => {
               navigate("/businessunit");
             }}
             elevation={1}
-            sx={{ padding: 1, borderRadius: "16px", textAlign: "center" }}
+            sx={{ padding: 1, borderRadius: "8px", textAlign: "center" }}
           >
             <BusinessCenterIcon sx={{ fontSize: 15, color: "#1976d2" }} />
             <Typography variant="h6" sx={{ mt: 1 }}>
@@ -34,21 +34,8 @@ const SetupMenu = () => {
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={6} sm={6} md={3}>
-          <Paper
-            onClick={() => {
-              navigate("/jobtitle");
-            }}
-            elevation={3}
-            sx={{ padding: 1, borderRadius: "16px", textAlign: "center" }}
-          >
-            <WorkIcon sx={{ fontSize: 15, color: "#FA500" }} />
-            <Typography variant="h6" sx={{ mt: 1 }}>
-              Job Title
-            </Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={6} md={3}>
+
+        <Grid item xs={6} sm={6} md={2}>
           <Paper
             onClick={() => {
               navigate("/jobcatagory");
@@ -62,7 +49,7 @@ const SetupMenu = () => {
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={6} sm={6} md={3}>
+        <Grid item xs={6} sm={6} md={2}>
           <Paper
             onClick={() => {
               navigate("/jobgrade");
@@ -73,6 +60,34 @@ const SetupMenu = () => {
             <GradeIcon sx={{ fontSize: 15, color: "#1976d2" }} />
             <Typography variant="h6" sx={{ mt: 1 }}>
               Job Grade
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={6} sm={6} md={2}>
+          <Paper
+            onClick={() => {
+              navigate("/jobtitle");
+            }}
+            elevation={3}
+            sx={{ padding: 1, borderRadius: "16px", textAlign: "center" }}
+          >
+            <WorkIcon sx={{ fontSize: 15, color: "#FA500" }} />
+            <Typography variant="h6" sx={{ mt: 1 }}>
+              Job Title
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={4} sm={4} md={2}>
+          <Paper
+            onClick={() => {
+              navigate("/job");
+            }}
+            elevation={3}
+            sx={{ padding: 1, borderRadius: "10px", textAlign: "center" }}
+          >
+            <WorkIcon sx={{ fontSize: 15, color: "#FA500" }} />
+            <Typography variant="h6" sx={{ mt: 1 }}>
+              New Job 
             </Typography>
           </Paper>
         </Grid>

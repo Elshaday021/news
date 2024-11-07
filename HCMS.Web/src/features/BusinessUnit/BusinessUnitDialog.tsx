@@ -93,14 +93,6 @@ export const BusinessUnitDialog = ({ onClose }: { onClose: () => void }) => {
                     />
                   </Box>
                 </Grid>
-
-                <Grid item xs={12}>
-                  <FormTextField
-                    name="areaCode"
-                    label="Business Unit Area Code"
-                    type="text"
-                  />
-                </Grid>
                 <Grid item xs={12}>
                 <FormTextField
                     name="address"
@@ -108,6 +100,21 @@ export const BusinessUnitDialog = ({ onClose }: { onClose: () => void }) => {
                     type="text"
                   />
                   </Grid>
+                <Grid item xs={12}>
+                <Box sx={{ display: "flex", gap: 2 }}>
+                  <FormTextField
+                    name="areaCode"
+                    label="Business Unit Area Code"
+                    type="text"
+                  />
+                           <FormTextField
+                    name="staffStrength"
+                    label="Staff Strength"
+                    type="text"
+                  />
+                  </Box>
+                </Grid>
+        
               </Grid>
             </DialogContent>
             <DialogActions sx={{ p: 2 }}>

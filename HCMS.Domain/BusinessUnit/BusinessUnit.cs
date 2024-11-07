@@ -12,6 +12,7 @@ namespace HCMS.Domain.BusinessUnit
         public int Type { get; set; }
         public string AreaCode { get; set; }
         public string Address { get; set; }
+        public int? StaffStrength { get; set; }
 
     }
 }
