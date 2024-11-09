@@ -5,9 +5,12 @@ import SetupMenu from "../SetupMenu";
 import { PageHeader } from "../../../components/PageHeader";
 import WorkIcon from "@mui/icons-material/Work";
 import AddIcon from "@mui/icons-material/Add";
+import { JobList } from "./JobList";
+import { useGetAllJobListQuery } from "../../../app/api";
 
 export const JobHome = ()=>{
     const[dialogOpened, setDialogOpened]=useState(false);
+    const { data } = useGetAllJobListQuery();
     return(
 <Box>
       <SetupMenu />
@@ -44,6 +47,9 @@ export const JobHome = ()=>{
                 />)}
 
 </Box>
+<Box>
+        <JobList items={data} />
+      </Box>
         </Box>
     )
 }

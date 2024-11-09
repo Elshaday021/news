@@ -20,11 +20,13 @@ namespace HCMS.Application.Features.Employees.Queries
             var newemployeeList = new List<EmployeeDto>();
             var businessUnitList = await dataService.BusinessUnits.ToListAsync();
             var jobTitleList = await dataService.JobTitles.ToListAsync();
+            var jobList=await dataService.Jobs.ToListAsync();
             foreach (var emp in employeeList)
             {
 
                 var businessUnit = businessUnitList.Where(bu => bu.Id == emp.BusinessUnitID).FirstOrDefault();
-                var jobTitle = jobTitleList.Where(j => j.Id== emp.JobTitleId).FirstOrDefault();
+                var job=jobList.Where(jb=>jb.Id==emp.JobId).FirstOrDefault();
+                var jobTitle = jobTitleList.Where(j => j.Id== job.JobTitleId).FirstOrDefault();
                 var employee = new EmployeeDto()
                 {
                     EmployeeName = emp.Name,

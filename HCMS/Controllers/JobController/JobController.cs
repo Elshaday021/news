@@ -1,4 +1,5 @@
-﻿using HCMS.Application.Features.Jobs.Command;
+﻿using HCMS.Application.Features.Jobs;
+using HCMS.Application.Features.Jobs.Command;
 using HCMS.Application.Features.Jobs.JobCatagories;
 using HCMS.Application.Features.Jobs.JobGrades;
 using HCMS.Application.Features.Jobs.JobTitles;
@@ -64,6 +65,20 @@ namespace HCMS.API.Controllers.JobController
             var addJob = await mediator.Send(command);
             return addJob;
         }
-        
+
+        [HttpGet("AllJobList",Name ="GetAllJobList")]
+        public async Task <ActionResult<List<JobDto>>> GetAllJobList ()
+        {
+         var jobList= await mediator.Send(new GetAllJobQuery());
+            return jobList;
+        }
+        [HttpGet("BusinessUnitJobList", Name ="GetBusinessUnitJobList")]
+        public async Task<ActionResult<List<JobDto>>> GetBusinessUnitJobList(int businessUnitId)
+        {
+            var businessUnitJobList= await mediator.Send(new GetJobListByBusinessUnitQuery { BusinessUnitId = businessUnitId });
+            return businessUnitJobList;
+        }
+
+
     };
 }

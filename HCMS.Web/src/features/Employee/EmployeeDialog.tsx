@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import { useCallback, useEffect, useState } from "react";
-import { DialogHeader, FormSelectField, FormTextField } from "../../components";
+import { DialogHeader, FormSelectField, FormTextField, SelectOption } from "../../components";
 import {
   Box,
   Button,
@@ -13,8 +13,11 @@ import {
   BusinessUnitDto,
   CreateEmployeeProfileCommand,
   EmployeeDto,
+  JobDto,
   useCreateBusinessUnitMutation,
   useCreateEmployeeProfileMutation,
+  useGetAllJobListQuery,
+  useGetBusinessUnitJobListQuery,
 } from "../../app/api/HCMSApi";
 import { useBusinessUnit } from "../BusinessUnit/useBusinessUnits";
 import { useJobTitle } from "../Job/JobTitle/useJobTitle";
@@ -32,13 +35,14 @@ export const EmployeeDialog = ({ onClose }: { onClose: () => void }) => {
   const [addEmployee] = useCreateEmployeeProfileMutation();
   const { businessUnitLookups } = useBusinessUnit();
   const { jobTitlesLookups } = useJobTitle();
+  const {data:businessUnitJobList}=useGetAllJobListQuery();
   useEffect(() => {
     setEmployee({
       ...emptyEmployeeData,
       ...EmployeeData,
     });
   }, [emptyEmployeeData, EmployeeData]);
-
+console.log();
   const handleSubmit = useCallback(
     (values: CreateEmployeeProfileCommand) => {
       const birthDate = dayjs(values.birthDate).format("YYYY-MM-DD");
@@ -68,6 +72,9 @@ export const EmployeeDialog = ({ onClose }: { onClose: () => void }) => {
           //validationSchema={validationSchema}
           validateOnChange={true}
         >
+        {({values})=>{
+        return(
+    
           <Form>
             <DialogHeader title="Add Employee" onClose={onClose} />
             <DialogContent dividers={true}>
@@ -137,17 +144,23 @@ export const EmployeeDialog = ({ onClose }: { onClose: () => void }) => {
                   <Grid item xs={12}>
                     <Box sx={{ display: "flex", gap: 2 }}>
                       <FormSelectField
-                        name="businessUnitId"
+                        name="businessUnitID"
                         label="Business Unit"
                         type="number"
                         options={businessUnitLookups}
                       />
+                      {(values.businessUnitID&&(
                       <FormSelectField
-                        name="jobTitleId"
-                        label="Job Title"
+                        name="jobId"
+                        label="Job "
                         type="number"
-                        options={jobTitlesLookups}
+                        options={businessUnitJobList
+                          ?.filter((j) => j.businessUnitId === values.businessUnitID && j.isVacant==true)
+                          .map((j) => ({ value: j.id, label: j.jobTitle })) as SelectOption[]}
+
                       />
+                      
+                    ))}
                     </Box>
                   </Grid>
 
@@ -168,6 +181,7 @@ export const EmployeeDialog = ({ onClose }: { onClose: () => void }) => {
               </Button>
             </DialogActions>
           </Form>
+              )}}
         </Formik>
       )}
     </Dialog>

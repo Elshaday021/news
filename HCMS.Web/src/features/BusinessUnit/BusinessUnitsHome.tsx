@@ -37,6 +37,7 @@ export const BusinessUnitsHome = () => {
           icon={<BusinessCenterIcon sx={{ fontSize: 15, color: "#1976d2" }} />}
         />
         <Box sx={{ flex: 1 }}></Box>
+        
         <Button
           variant="outlined"
           startIcon={<AddIcon />}

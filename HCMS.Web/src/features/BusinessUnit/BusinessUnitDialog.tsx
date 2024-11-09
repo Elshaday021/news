@@ -24,7 +24,9 @@ const emptyBusinessUnitData = {
 export const BusinessUnitDialog = ({ onClose }: { onClose: () => void }) => {
   const [businessUnitData, setBusinessUnit] =
     useState<CreateBusinessUnitCommand>();
+
   const [addBusinessUnit] = useCreateBusinessUnitMutation();
+
   const { businessUnitLookups } = useBusinessUnit();
   const { businessUnitTypeLookups } = useBusinessUnitType();
 
@@ -71,50 +73,53 @@ export const BusinessUnitDialog = ({ onClose }: { onClose: () => void }) => {
                 )} */}
 
                 <Grid item xs={12}>
+                <Box sx={{ display: "flex", gap: 2 }}>
                   <FormTextField
                     name="businessUnitName"
                     label="Business Unit Name"
                     type="text"
                   />
-                </Grid>
-                <Grid item xs={12}>
-                  <Box sx={{ display: "flex", gap: 2 }}>
                     <FormSelectField
                       name="businessUnitTypeId"
                       label="Business Unit Type "
                       type="number"
                       options={businessUnitTypeLookups}
                     />
+                    </Box>
+                </Grid>
+                <Grid item xs={12}>
+                  <Box sx={{ display: "flex", gap: 2 }}>
+                  
                                         <FormSelectField
                       name="parentId"
                       label="Parent Business Unit"
                       type="number"
                       options={businessUnitLookups}
                     />
+                    <FormTextField
+                      name="staffStrength"
+                      label="Staff Strength"
+                      type="text"
+                    />
                   </Box>
                 </Grid>
+                
                 <Grid item xs={12}>
-                <FormTextField
-                    name="address"
-                    label="Business Unit Address"
-                    type="text"
-                  />
-                  </Grid>
-                <Grid item xs={12}>
-                <Box sx={{ display: "flex", gap: 2 }}>
+                 <Box sx={{ display: "flex", gap: 2 }}>
+                    <FormTextField
+                      name="areaCode"
+                      label="Business Unit Area Code"
+                      type="text"
+                    />
+
                   <FormTextField
-                    name="areaCode"
-                    label="Business Unit Area Code"
-                    type="text"
-                  />
-                           <FormTextField
-                    name="staffStrength"
-                    label="Staff Strength"
-                    type="text"
-                  />
+                      name="address"
+                      label="Business Unit Address"
+                      type="text"
+                    />
+         
                   </Box>
-                </Grid>
-        
+                  </Grid>
               </Grid>
             </DialogContent>
             <DialogActions sx={{ p: 2 }}>

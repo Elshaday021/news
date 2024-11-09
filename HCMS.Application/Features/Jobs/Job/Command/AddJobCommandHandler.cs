@@ -24,6 +24,7 @@ namespace HCMS.Application.Features.Jobs.Command
             {
                 JobTitleId = command.jobTitleID,
                 BusinessUnitId = command.businessunitId,
+                IsVacant = true
             };
             await dataservice.Jobs.AddAsync(newJob);
             await dataservice.SaveAsync(cancellationToken);

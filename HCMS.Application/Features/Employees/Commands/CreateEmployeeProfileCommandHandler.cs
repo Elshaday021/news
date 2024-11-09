@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using Fluid.Values;
 using HCMS.Application.Features.Employees;
 using HCMS.Domain;
+using HCMS.Domain.Job;
 using HCMS.Services.DataService;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace HCMS.Application.Features.Employees.Commands
@@ -16,15 +19,18 @@ namespace HCMS.Application.Features.Employees.Commands
            this.mapper=mapper;
            this.dataService=dataService;
         }
-        public Task<int> Handle (CreateEmployeeProfileCommand request ,CancellationToken cancellationToken)
+        public async Task<int> Handle (CreateEmployeeProfileCommand request ,CancellationToken cancellationToken)
         {
             var employee=mapper.Map<Employee>(request);
 
+            var vacantJob = dataService.Jobs
+                      .Where(jb => jb.Id == employee.JobId)
+                      .ExecuteUpdate(jb => jb.SetProperty(job => job.IsVacant, false));
 
             dataService.Employees.Add(employee);
 
-            dataService.Save();
-            return Task.FromResult(employee.Id);
+            dataService.SaveAsync(cancellationToken);
+            return employee.Id;
         }
     }
 }

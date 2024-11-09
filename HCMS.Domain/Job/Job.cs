@@ -11,6 +11,7 @@ namespace HCMS.Domain.Job
         public int Id { get; set; }
         public int JobTitleId { get; set; }
         public int BusinessUnitId { get; set; }
+        public bool IsVacant { get; set; }
 
     }
 }

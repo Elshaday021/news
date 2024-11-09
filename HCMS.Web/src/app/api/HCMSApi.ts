@@ -101,11 +101,23 @@ const injectedRtkApi = api.injectEndpoints({
     >({
       query: () => ({ url: `/api/Job/allJobGrades` }),
     }),
+    getAllJobList: build.query<GetAllJobListApiResponse, GetAllJobListApiArg>({
+      query: () => ({ url: `/api/Job/AllJobList` }),
+    }),
     getAllJobTitle: build.query<
       GetAllJobTitleApiResponse,
       GetAllJobTitleApiArg
     >({
       query: () => ({ url: `/api/Job/allJobTitles` }),
+    }),
+    getBusinessUnitJobList: build.query<
+      GetBusinessUnitJobListApiResponse,
+      GetBusinessUnitJobListApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/Job/BusinessUnitJobList`,
+        params: { businessUnitId: queryArg.businessUnitId },
+      }),
     }),
     getAllLookups: build.query<GetAllLookupsApiResponse, GetAllLookupsApiArg>({
       query: () => ({ url: `/api/Lookup/all` }),
@@ -162,8 +174,15 @@ export type GetAllJobCatagoryApiResponse =
 export type GetAllJobCatagoryApiArg = void;
 export type GetAllJobGradeApiResponse = /** status 200 Success */ JobGrade[];
 export type GetAllJobGradeApiArg = void;
+export type GetAllJobListApiResponse = /** status 200 Success */ JobDto[];
+export type GetAllJobListApiArg = void;
 export type GetAllJobTitleApiResponse = /** status 200 Success */ JobTitleDto[];
 export type GetAllJobTitleApiArg = void;
+export type GetBusinessUnitJobListApiResponse =
+  /** status 200 Success */ JobDto[];
+export type GetBusinessUnitJobListApiArg = {
+  businessUnitId?: number;
+};
 export type GetAllLookupsApiResponse = /** status 200 Success */ LookupDto;
 export type GetAllLookupsApiArg = void;
 export type LoginRes = {
@@ -217,7 +236,7 @@ export type MartialStatus = 1 | 2 | 3 | 4;
 export type CreateEmployeeProfileCommand = {
   name?: string | null;
   businessUnitID?: number;
-  jobTitleId?: number;
+  jobId?: number;
   birthDate?: string;
   employementDate?: string;
   gender?: Gender;
@@ -265,6 +284,14 @@ export type JobGrade = {
   name?: string | null;
   description?: string | null;
 };
+export type JobDto = {
+  id?: number;
+  jobTitle?: string | null;
+  businessUnit?: string | null;
+  businessUnitId?: number | null;
+  vacant?: string | null;
+  isVacant?: boolean;
+};
 export type JobTitleDto = {
   id?: number;
   title?: string | null;
@@ -303,8 +330,12 @@ export const {
   useLazyGetAllJobCatagoryQuery,
   useGetAllJobGradeQuery,
   useLazyGetAllJobGradeQuery,
+  useGetAllJobListQuery,
+  useLazyGetAllJobListQuery,
   useGetAllJobTitleQuery,
   useLazyGetAllJobTitleQuery,
+  useGetBusinessUnitJobListQuery,
+  useLazyGetBusinessUnitJobListQuery,
   useGetAllLookupsQuery,
   useLazyGetAllLookupsQuery,
 } = injectedRtkApi;

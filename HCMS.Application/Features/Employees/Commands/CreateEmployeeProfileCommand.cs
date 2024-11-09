@@ -11,7 +11,7 @@ namespace HCMS.Application.Features.Employees
        // public string EmployeeId { get; set; }
         public string Name { get; set; }
         public int BusinessUnitID { get; set; }
-        public int JobTitleId { get; set; }
+        public int JobId { get; set; }
         public DateOnly BirthDate { get; set; }
         public DateOnly EmployementDate { get; set; }
         public Gender Gender { get; set; }

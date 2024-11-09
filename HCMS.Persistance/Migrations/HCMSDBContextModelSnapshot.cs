@@ -123,7 +123,7 @@ namespace HCMS.Persistance.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<int>("JobTitleId")
+                    b.Property<int>("JobId")
                         .HasColumnType("int");
 
                     b.Property<int>("MartialStatus")
@@ -153,6 +153,9 @@ namespace HCMS.Persistance.Migrations
 
                     b.Property<int>("BusinessUnitId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsVacant")
+                        .HasColumnType("bit");
 
                     b.Property<int>("JobTitleId")
                         .HasColumnType("int");
