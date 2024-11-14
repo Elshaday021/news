@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Fragment, useState } from "react";
-import { useNavigateToDetailPage } from "./useNavigateToDetailPage";
 import { BusinessUnitDto, useGetAllBuisnessUnitListsQuery, useGetAllBusinessUnitsQuery, useGetBusinessUnitCountPerApprovalStatusQuery, useGetBusinessUnitJobListQuery } from "../../../app/api";
 import { ApprovalStatus } from "../../../app/api/enums";
 import { BusinessUnitDialog } from "../BusinessUnitDialog";
@@ -21,7 +20,6 @@ import { RequestApprovalButton } from "../RequestApprovalButton";
 import { ApproveOrRejectRequestButton } from "../ApproveOrRejectRequestButton";
 
 export const RejectedApprovalRequests = () => {
-  const { navigateToDetailPage } = useNavigateToDetailPage();
   const [pagination, setPagination] = useState<{
     pageNumber: number;
     pageSize?: number;
@@ -66,7 +64,7 @@ export const RejectedApprovalRequests = () => {
                       {item.name}
                     </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
-                      {item.parentBusinessUnit}
+                      {item.parentBusinessUnit?.name}
                     </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.businessUnitID}
