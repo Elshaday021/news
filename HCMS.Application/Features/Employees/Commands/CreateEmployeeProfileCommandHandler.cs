@@ -2,7 +2,6 @@
 using Fluid.Values;
 using HCMS.Application.Features.Employees;
 using HCMS.Domain;
-using HCMS.Domain.Job;
 using HCMS.Services.DataService;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -27,9 +26,9 @@ namespace HCMS.Application.Features.Employees.Commands
                       .Where(jb => jb.Id == employee.JobId)
                       .ExecuteUpdate(jb => jb.SetProperty(job => job.IsVacant, false));
 
-            dataService.Employees.Add(employee);
+           dataService.Employees.Add(employee);
 
-            dataService.SaveAsync(cancellationToken);
+           await dataService.SaveAsync(cancellationToken);
             return employee.Id;
         }
     }

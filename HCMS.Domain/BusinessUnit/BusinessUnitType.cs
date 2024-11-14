@@ -1,6 +1,6 @@
 ﻿using HCMS.Domain.Enum;
 
-namespace HCMS.Domain.BusinessUnit
+namespace HCMS.Domain
 {
     public class BusinessUnitType
     {

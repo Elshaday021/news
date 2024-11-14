@@ -23,9 +23,9 @@ namespace HCMS.Application.Features.Jobs.JobTitles
             foreach (var bu in jobTitleList)
             {
       
-                    var jobCatagory = jobCatagoryList.Where(j => ((int)j.Value) == bu.JobCatagoryId).FirstOrDefault();
+                    var jobCatagory = jobCatagoryList.Where(j => j.Value == bu.JobCatagoryId).FirstOrDefault();
 
-                var jobGrade=jobGradeList.Where(j => ((int)j.Value)==bu.JobGradeId).FirstOrDefault();
+                var jobGrade=jobGradeList.Where(j => j.Value==bu.JobGradeId).FirstOrDefault();
                 var jobTitle = new JobTitleDto()
                 {
                     Id=bu.Id,

@@ -37,7 +37,6 @@ export const JobHome = ()=>{
               borderColor: "#1976d2", // Border color on hover
             },
           }}
-          //    disabled={!permissions.canCreateOrUpdateAllocation}
         >
           Add New Job
         </Button>

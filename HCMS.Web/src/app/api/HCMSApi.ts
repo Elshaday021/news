@@ -32,6 +32,35 @@ const injectedRtkApi = api.injectEndpoints({
     >({
       query: () => ({ url: `/api/BusinessUnit/all` }),
     }),
+    getAllBuisnessUnitLists: build.query<
+      GetAllBuisnessUnitListsApiResponse,
+      GetAllBuisnessUnitListsApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/BusinessUnit/allBusinessUnit`,
+        params: {
+          status: queryArg.status,
+          pageNumber: queryArg.pageNumber,
+          pageSize: queryArg.pageSize,
+        },
+      }),
+    }),
+    approveBusinessUnit: build.mutation<
+      ApproveBusinessUnitApiResponse,
+      ApproveBusinessUnitApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/BusinessUnit/approve`,
+        method: "POST",
+        body: queryArg.approveBusinessUnitCommand,
+      }),
+    }),
+    getBusinessUnitCountPerApprovalStatus: build.query<
+      GetBusinessUnitCountPerApprovalStatusApiResponse,
+      GetBusinessUnitCountPerApprovalStatusApiArg
+    >({
+      query: () => ({ url: `/api/BusinessUnit/counts` }),
+    }),
     createBusinessUnit: build.mutation<
       CreateBusinessUnitApiResponse,
       CreateBusinessUnitApiArg
@@ -40,6 +69,36 @@ const injectedRtkApi = api.injectEndpoints({
         url: `/api/BusinessUnit/CreateBusinessUnit`,
         method: "POST",
         body: queryArg.createBusinessUnitCommand,
+      }),
+    }),
+    rejectBusinessUnit: build.mutation<
+      RejectBusinessUnitApiResponse,
+      RejectBusinessUnitApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/BusinessUnit/Reject`,
+        method: "POST",
+        body: queryArg.rejectBusinessUnitCommand,
+      }),
+    }),
+    submitBusinessUnit: build.mutation<
+      SubmitBusinessUnitApiResponse,
+      SubmitBusinessUnitApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/BusinessUnit/submit`,
+        method: "POST",
+        body: queryArg.submitBusinessUnitCommand,
+      }),
+    }),
+    updateBusinessUnit: build.mutation<
+      UpdateBusinessUnitApiResponse,
+      UpdateBusinessUnitApiArg
+    >({
+      query: (queryArg) => ({
+        url: `/api/BusinessUnit/update`,
+        method: "POST",
+        body: queryArg.updateBusinessUnitCommand,
       }),
     }),
     createEmployeeProfile: build.mutation<
@@ -140,11 +199,37 @@ export type VerificationCodeApiArg = {
   verificationCode: VerificationCode;
 };
 export type GetAllBusinessUnitsApiResponse =
-  /** status 200 Success */ BusinessUnitDto[];
+  /** status 200 Success */ BusinessUnitLists;
 export type GetAllBusinessUnitsApiArg = void;
+export type GetAllBuisnessUnitListsApiResponse =
+  /** status 200 Success */ BusinessUnitSearchResult;
+export type GetAllBuisnessUnitListsApiArg = {
+  status?: ApprovalStatus;
+  pageNumber?: number;
+  pageSize?: number;
+};
+export type ApproveBusinessUnitApiResponse = /** status 200 Success */ number;
+export type ApproveBusinessUnitApiArg = {
+  approveBusinessUnitCommand: ApproveBusinessUnitCommand;
+};
+export type GetBusinessUnitCountPerApprovalStatusApiResponse =
+  /** status 200 Success */ BusinessUnitCountsByStatus;
+export type GetBusinessUnitCountPerApprovalStatusApiArg = void;
 export type CreateBusinessUnitApiResponse = /** status 200 Success */ number;
 export type CreateBusinessUnitApiArg = {
   createBusinessUnitCommand: CreateBusinessUnitCommand;
+};
+export type RejectBusinessUnitApiResponse = /** status 200 Success */ number;
+export type RejectBusinessUnitApiArg = {
+  rejectBusinessUnitCommand: RejectBusinessUnitCommand;
+};
+export type SubmitBusinessUnitApiResponse = /** status 200 Success */ number;
+export type SubmitBusinessUnitApiArg = {
+  submitBusinessUnitCommand: SubmitBusinessUnitCommand;
+};
+export type UpdateBusinessUnitApiResponse = /** status 200 Success */ number;
+export type UpdateBusinessUnitApiArg = {
+  updateBusinessUnitCommand: UpdateBusinessUnitCommand;
 };
 export type CreateEmployeeProfileApiResponse = /** status 200 Success */ number;
 export type CreateEmployeeProfileApiArg = {
@@ -213,20 +298,76 @@ export type UserRegisterDto = {
 export type VerificationCode = {
   code?: string | null;
 };
+export type BusinessUnitTypeEnum = 1 | 2 | 3 | 4 | 5;
+export type ApprovalStatus = 1 | 2 | 3 | 4;
+export type BusinessUnitType = {
+  value?: BusinessUnitTypeEnum;
+  name?: string | null;
+  description?: string | null;
+};
+export type BusinessUnit = {
+  id?: number;
+  businessUnitID?: string | null;
+  name?: string | null;
+  parentId?: number;
+  type?: BusinessUnitTypeEnum;
+  areaCode?: string | null;
+  address?: string | null;
+  staffStrength?: number | null;
+  approvalStatus?: ApprovalStatus;
+  businessUnitType?: BusinessUnitType;
+};
 export type BusinessUnitDto = {
   id?: number;
   businessUnitID?: string | null;
   name?: string | null;
-  parentBusinessUnit?: string | null;
-  parentBusinessUnitID?: number;
+  parentBusinessUnit?: BusinessUnit;
+  parentId?: number;
   type?: string | null;
+  businessUnitTypeId?: BusinessUnitTypeEnum;
   areaCode?: string | null;
-  addres?: string | null;
+  address?: string | null;
+  staffStrength?: number | null;
+  approvalStatus?: ApprovalStatus;
+};
+export type BusinessUnitLists = {
+  approved?: BusinessUnitDto[] | null;
+  submitted?: BusinessUnitDto[] | null;
+  rejected?: BusinessUnitDto[] | null;
+  draft?: BusinessUnitDto[] | null;
+};
+export type BusinessUnitSearchResult = {
+  items?: BusinessUnitDto[] | null;
+  totalCount?: number;
+};
+export type ApproveBusinessUnitCommand = {
+  id?: number;
+};
+export type BusinessUnitCountsByStatus = {
+  approved?: number;
+  approvalRequests?: number;
+  rejected?: number;
+  drafts?: number;
 };
 export type CreateBusinessUnitCommand = {
   businessUnitName?: string | null;
   parentId?: number;
-  businessUnitTypeId?: number;
+  businessUnitTypeId?: BusinessUnitTypeEnum;
+  areaCode?: string | null;
+  address?: string | null;
+  staffStrength?: number | null;
+};
+export type RejectBusinessUnitCommand = {
+  id?: number;
+};
+export type SubmitBusinessUnitCommand = {
+  id?: number;
+};
+export type UpdateBusinessUnitCommand = {
+  id?: number;
+  businessUnitName?: string | null;
+  parentId?: number;
+  businessUnitTypeId?: BusinessUnitTypeEnum;
   areaCode?: string | null;
   address?: string | null;
   staffStrength?: number | null;
@@ -265,20 +406,20 @@ export type AddJobGradeCommand = {
   name?: string | null;
   description?: string | null;
 };
+export type JobCatagoryEnum = 1 | 2 | 3 | 4;
+export type JobGradeEnum = 1 | 2 | 3 | 4 | 5;
 export type AddJobTitleCommand = {
   id?: number;
   title?: string | null;
   description?: string | null;
-  jobCatagoryId?: number;
-  jobGradeId?: number;
+  jobCatagoryId?: JobCatagoryEnum;
+  jobGradeId?: JobGradeEnum;
 };
-export type JobCatagoryEnum = 1 | 2 | 3 | 4;
 export type JobCatagory = {
   value?: JobCatagoryEnum;
   name?: string | null;
   description?: string | null;
 };
-export type JobGradeEnum = 1 | 2 | 3 | 4 | 5;
 export type JobGrade = {
   value?: JobGradeEnum;
   name?: string | null;
@@ -299,17 +440,11 @@ export type JobTitleDto = {
   jobCatagory?: string | null;
   jobGrade?: string | null;
 };
-export type BusinessUnitTypeEnum = 1 | 2 | 3 | 4 | 5;
-export type BusinessUnitType = {
-  value?: BusinessUnitTypeEnum;
-  name?: string | null;
-  description?: string | null;
-};
 export type LookupDto = {
   jobTitles?: JobTitleDto[] | null;
   jobCatagories?: JobCatagory[] | null;
   jobGrades?: JobGrade[] | null;
-  businessUnits?: BusinessUnitDto[] | null;
+  businessUnits?: BusinessUnitLists;
   businessUnitTypes?: BusinessUnitType[] | null;
 };
 export const {
@@ -318,7 +453,15 @@ export const {
   useVerificationCodeMutation,
   useGetAllBusinessUnitsQuery,
   useLazyGetAllBusinessUnitsQuery,
+  useGetAllBuisnessUnitListsQuery,
+  useLazyGetAllBuisnessUnitListsQuery,
+  useApproveBusinessUnitMutation,
+  useGetBusinessUnitCountPerApprovalStatusQuery,
+  useLazyGetBusinessUnitCountPerApprovalStatusQuery,
   useCreateBusinessUnitMutation,
+  useRejectBusinessUnitMutation,
+  useSubmitBusinessUnitMutation,
+  useUpdateBusinessUnitMutation,
   useCreateEmployeeProfileMutation,
   useGetAllEmployeesQuery,
   useLazyGetAllEmployeesQuery,

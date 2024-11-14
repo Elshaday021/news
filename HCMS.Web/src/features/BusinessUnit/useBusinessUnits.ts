@@ -1,22 +1,20 @@
 import { useMemo } from "react";
 import { SelectOption } from "../../types";
-import { useGetAllLookupsQuery } from "../../app/api/HCMSApi";
+import { useGetAllBusinessUnitsQuery, useGetAllLookupsQuery } from "../../app/api/HCMSApi";
 
 export const useBusinessUnit = () => {
-  const { data } = useGetAllLookupsQuery();
+  const { data:businessUnits } = useGetAllBusinessUnitsQuery();
 
-  const { businessUnitLookups, branches } = useMemo(() => {
-    const businessUnitLookups = (data?.businessUnits || []).map<SelectOption>(
-      ({ id, name, businessUnitID }) => ({
-        label: name || businessUnitID || "",
+  const businessUnitLookups = useMemo(
+    () =>
+      (businessUnits?.approved || []).map<SelectOption>(({ id, name }) => ({
+        label: name || "",
         value: id,
-      })
-    );
+      })),
+    [businessUnits?.approved]
+  );
 
-    return { businessUnitLookups, branches: data?.businessUnits || [] };
-  }, [data]);
-  return {
-    branches,
-    businessUnitLookups,
-  };
+  return { businessUnits, businessUnitLookups };
 };
+
+

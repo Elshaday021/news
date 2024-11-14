@@ -1,6 +1,6 @@
 ﻿using HCMS.Services.DataService;
 using MediatR;
-using HCMS.Domain.Job;
+using HCMS.Domain;
 
 namespace HCMS.Application.Features.Jobs.JobTitles
 {

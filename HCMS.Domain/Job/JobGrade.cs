@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HCMS.Domain.Job
+namespace HCMS.Domain
 {
     public class JobGrade
     {

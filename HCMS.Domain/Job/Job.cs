@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HCMS.Domain.Job
+namespace HCMS.Domain
 {
     public class Job
     {
@@ -12,6 +12,8 @@ namespace HCMS.Domain.Job
         public int JobTitleId { get; set; }
         public int BusinessUnitId { get; set; }
         public bool IsVacant { get; set; }
+        public BusinessUnit BusinessUnit { get; set; }
+        public JobTitle JobTitle { get; set; }
 
     }
 }

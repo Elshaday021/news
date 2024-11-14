@@ -24,7 +24,7 @@ namespace HCMS.Persistance.Migrations
 
             modelBuilder.HasSequence<int>("EmployeeId");
 
-            modelBuilder.Entity("HCMS.Domain.BusinessUnit.BusinessUnit", b =>
+            modelBuilder.Entity("HCMS.Domain.BusinessUnit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,6 +35,9 @@ namespace HCMS.Persistance.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ApprovalStatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("AreaCode")
                         .IsRequired()
@@ -59,10 +62,12 @@ namespace HCMS.Persistance.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Type");
+
                     b.ToTable("BusinessUnits");
                 });
 
-            modelBuilder.Entity("HCMS.Domain.BusinessUnit.BusinessUnitType", b =>
+            modelBuilder.Entity("HCMS.Domain.BusinessUnitType", b =>
                 {
                     b.Property<int>("Value")
                         .HasColumnType("int");
@@ -135,15 +140,19 @@ namespace HCMS.Persistance.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BusinessUnitID");
+
                     b.HasIndex("EmployeeId")
                         .IsUnique();
 
                     SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("EmployeeId"), false);
 
+                    b.HasIndex("JobId");
+
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("HCMS.Domain.Job.Job", b =>
+            modelBuilder.Entity("HCMS.Domain.Job", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -162,10 +171,14 @@ namespace HCMS.Persistance.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BusinessUnitId");
+
+                    b.HasIndex("JobTitleId");
+
                     b.ToTable("Jobs");
                 });
 
-            modelBuilder.Entity("HCMS.Domain.Job.JobCatagory", b =>
+            modelBuilder.Entity("HCMS.Domain.JobCatagory", b =>
                 {
                     b.Property<int>("Value")
                         .HasColumnType("int");
@@ -183,7 +196,7 @@ namespace HCMS.Persistance.Migrations
                     b.ToTable("JobCatagories");
                 });
 
-            modelBuilder.Entity("HCMS.Domain.Job.JobGrade", b =>
+            modelBuilder.Entity("HCMS.Domain.JobGrade", b =>
                 {
                     b.Property<int>("Value")
                         .HasColumnType("int");
@@ -201,7 +214,7 @@ namespace HCMS.Persistance.Migrations
                     b.ToTable("JobGrades");
                 });
 
-            modelBuilder.Entity("HCMS.Domain.Job.JobTitle", b =>
+            modelBuilder.Entity("HCMS.Domain.JobTitle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -225,10 +238,14 @@ namespace HCMS.Persistance.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("JobCatagoryId");
+
+                    b.HasIndex("JobGradeId");
+
                     b.ToTable("JobTitles");
                 });
 
-            modelBuilder.Entity("HCMS.Domain.Job.JobType", b =>
+            modelBuilder.Entity("HCMS.Domain.JobType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -473,6 +490,74 @@ namespace HCMS.Persistance.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("HCMS.Domain.BusinessUnit", b =>
+                {
+                    b.HasOne("HCMS.Domain.BusinessUnitType", "BusinessUnitType")
+                        .WithMany()
+                        .HasForeignKey("Type")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BusinessUnitType");
+                });
+
+            modelBuilder.Entity("HCMS.Domain.Employee", b =>
+                {
+                    b.HasOne("HCMS.Domain.BusinessUnit", "BusinessUnit")
+                        .WithMany()
+                        .HasForeignKey("BusinessUnitID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HCMS.Domain.Job", "Job")
+                        .WithMany()
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("BusinessUnit");
+
+                    b.Navigation("Job");
+                });
+
+            modelBuilder.Entity("HCMS.Domain.Job", b =>
+                {
+                    b.HasOne("HCMS.Domain.BusinessUnit", "BusinessUnit")
+                        .WithMany()
+                        .HasForeignKey("BusinessUnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HCMS.Domain.JobTitle", "JobTitle")
+                        .WithMany()
+                        .HasForeignKey("JobTitleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BusinessUnit");
+
+                    b.Navigation("JobTitle");
+                });
+
+            modelBuilder.Entity("HCMS.Domain.JobTitle", b =>
+                {
+                    b.HasOne("HCMS.Domain.JobCatagory", "JobCatagory")
+                        .WithMany()
+                        .HasForeignKey("JobCatagoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HCMS.Domain.JobGrade", "JobGrade")
+                        .WithMany()
+                        .HasForeignKey("JobGradeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("JobCatagory");
+
+                    b.Navigation("JobGrade");
                 });
 
             modelBuilder.Entity("HCMS.Domain.UserRole", b =>

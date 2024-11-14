@@ -1,4 +1,4 @@
-﻿using HCMS.Domain.BusinessUnit;
+﻿using HCMS.Domain;
 using HCMS.Services.DataService;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

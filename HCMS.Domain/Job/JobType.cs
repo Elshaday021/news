@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HCMS.Domain.Job
+namespace HCMS.Domain
 {
     public class JobType
     {

@@ -12,6 +12,10 @@ import {
 } from "@mui/material";
 import { Fragment, useState } from "react";
 import { BusinessUnitDto } from "../../app/api";
+import { BusinessUnitDialog } from "./BusinessUnitDialog";
+import { ApproveOrRejectRequestButton } from "./ApproveOrRejectRequestButton";
+import { RequestApprovalButton } from "./RequestApprovalButton";
+import { ApprovalStatus } from "../../app/api/enums";
 
 interface BusinessUnitListProps {
   items?: BusinessUnitDto[];
@@ -38,6 +42,7 @@ export const BusinessUnitList = ({
                 <TableCell sx={{fontWeight: 'bold'}}>Parent BusinessUnit</TableCell>
                 <TableCell sx={{fontWeight: 'bold'}}> BusinessUnit ID</TableCell>
                 <TableCell sx={{fontWeight: 'bold'}}> BusinessUnit Type</TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -67,6 +72,35 @@ export const BusinessUnitList = ({
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.type}
                     </TableCell>
+                    <TableCell>
+                    <Box
+                            sx={{
+                              display: "flex",
+                              justifyContent: "center",
+                              gap: 1,
+                            }}>
+                    {item.id && (
+                              <>
+                                {item.approvalStatus ===
+                                  ApprovalStatus.Draft && (
+                                  <RequestApprovalButton id={item.id} />
+                                )}
+                                {item.approvalStatus ===
+                                  ApprovalStatus.Submitted && (
+                                  <ApproveOrRejectRequestButton id={item.id} />
+                                )}
+                              </>
+                            )}
+                            {item.approvalStatus===(ApprovalStatus.Draft||ApprovalStatus.Rejected)&&( 
+                    <Button
+                                size="small"
+                                onClick={() => setSelectedBusinessUnit(item)}
+                              >
+                                Edit
+                              </Button>
+                            )}
+                              </Box>
+                              </TableCell>
                   </TableRow>
                 </Fragment>
               ))}
@@ -74,6 +108,17 @@ export const BusinessUnitList = ({
           </Table>
         </TableContainer>
       </Paper>
+      
+      {selectedBusinessUnit && (
+        <BusinessUnitDialog
+        businessUnit={selectedBusinessUnit}
+        onClose={() => {
+          setSelectedBusinessUnit(undefined);
+        }}
+             title="Edit BusinesUnit"
+        />
+      )}
+           
     </Box>
   );
 };

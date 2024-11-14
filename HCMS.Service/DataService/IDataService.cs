@@ -1,7 +1,6 @@
-﻿using HCMS.Domain.BusinessUnit;
+﻿
 using HCMS.Domain.EmailTemplet;
 using HCMS.Domain;
-using HCMS.Domain.Job;
 using Microsoft.EntityFrameworkCore;
 
 namespace HCMS.Services.DataService

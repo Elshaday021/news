@@ -17,6 +17,8 @@ namespace HCMS.Persistance.Configuration
                 .IsRequired()
                 .HasDefaultValueSql("NEXT VALUE FOR EMPLOYEEID");
             builder.HasIndex(X => X.EmployeeId).IsUnique(true).IsClustered(false);
+            builder.HasOne(x => x.BusinessUnit).WithMany().HasForeignKey(x => x.BusinessUnitID);
+            builder.HasOne(x => x.Job).WithMany().HasForeignKey(x => x.JobId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -1,11 +1,12 @@
-﻿using HCMS.Domain.BusinessUnit;
+﻿using HCMS.Domain;
+using HCMS.Domain.Enum;
 using HCMS.Services.DataService;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace HCMS.Application.Features.BusinessUnits.Commands.CreateBusinessUnit
 {
-    public record CreateBusinessUnitCommand( string BusinessUnitName, int ParentId, int businessUnitTypeId, string AreaCode ,string Address,int? StaffStrength ) : IRequest<int>;
+    public record CreateBusinessUnitCommand( string BusinessUnitName, int ParentId, BusinessUnitTypeEnum businessUnitTypeId, string AreaCode ,string Address,int? StaffStrength ) : IRequest<int>;
 
     public class CreateBusinessUnitCommandHandler : IRequestHandler<CreateBusinessUnitCommand, int>
     {

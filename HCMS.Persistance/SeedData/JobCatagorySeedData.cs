@@ -1,5 +1,5 @@
 ﻿using HCMS.Domain.Enum;
-using HCMS.Domain.Job;
+using HCMS.Domain;
 using HCMS.Persistance.DBContext;
 
 namespace HCMS.Persistance.SeedData

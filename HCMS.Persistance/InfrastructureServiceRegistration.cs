@@ -14,8 +14,7 @@ public static class InfrastructureServiceRegistration
 {
     public static IServiceCollection AddInfrastructureService(this IServiceCollection services)
     {
-        //services.AddScoped<IDocumentUploadService, DocumentUploadService>();
-        //services.AddTransient<IIdentityService, IdentityService>();
+
 
         _ = services.AddIdentity<HRUser, HRRole>(options =>
         {
@@ -56,46 +55,7 @@ public static class InfrastructureServiceRegistration
                 options.ExpireTimeSpan = TimeSpan.FromHours(8);
             });
 
-        //services.AddAuthorization(options =>
-        //{
-        //    //Allocation
-        //    options.AddPolicy(AuthPolicy.CanApproveAllocation, policy => policy.RequireRole(Roles.ShareUnitDirector));
-        //    options.AddPolicy(AuthPolicy.CanCreateOrUpdateAllocation, policy => policy.RequireRole(Roles.ShareUnitSectionHead));
-        //    options.AddPolicy(AuthPolicy.CanCreateOrUpdateBankAllocation, policy => policy.RequireRole(Roles.ShareUnitSectionHead));
-        //    options.AddPolicy(AuthPolicy.CanApproveBankAllocation, policy => policy.RequireRole(Roles.ShareUnitDirector));
-
-        //    //Dividend Setup
-        //    options.AddPolicy(AuthPolicy.CanCreateOrUpdateDividendSetup, policy => policy.RequireRole(Roles.ShareUnitSectionHead, Roles.ShareUnitDirector));
-        //    options.AddPolicy(AuthPolicy.CanApproveDividendSetup, policy => policy.RequireRole(Roles.ShareUnitDirector, Roles.ShareUnitSectionHead));
-
-        //    //ParValue
-        //    options.AddPolicy(AuthPolicy.CanApproveParValue, policy => policy.RequireRole(Roles.ShareUnitDirector, Roles.ShareUnitSectionHead));
-        //    options.AddPolicy(AuthPolicy.CanCreateOrUpdateParValue, policy => policy.RequireRole(Roles.ShareUnitDirector, Roles.ShareUnitSectionHead));
-
-        //    //Subscription Group
-        //    options.AddPolicy(AuthPolicy.CanCreateOrUpdateSubscriptionGroup, policy => policy.RequireRole(Roles.ShareUnitDirector, Roles.ShareUnitSectionHead));
-
-        //    //Shareholder
-        //    options.AddPolicy(AuthPolicy.CanCreateOrUpdateShareholderInfo, policy => policy.RequireRole(Roles.ShareOfficer));
-        //    options.AddPolicy(AuthPolicy.CanSubmitShareholderApprovalRequest, policy => policy.RequireRole(Roles.ShareOfficer));
-        //    options.AddPolicy(AuthPolicy.CanApproveShareholder, policy => policy.RequireRole(Roles.ShareUnitDirector, Roles.ShareUnitSectionHead));
-
-        //    //Subscription
-        //    options.AddPolicy(AuthPolicy.CanCreateOrUpdateSubscription, policy => policy.RequireRole(Roles.ShareOfficer));
-
-        //    //Payment
-        //    options.AddPolicy(AuthPolicy.CanCreateOrUpdatePayment, policy => policy.RequireRole(Roles.ShareOfficer));
-
-        //    //Transfer
-        //    options.AddPolicy(AuthPolicy.CanCreateOrUpdateTransfer, policy => policy.RequireRole(Roles.ShareOfficer));
-
-        //    //admin
-        //    options.AddPolicy(AuthPolicy.CanCreateOrUpdateUser, policy => policy.RequireRole(Roles.ITAdmin));
-
-        //    //endofday
-        //    options.AddPolicy(AuthPolicy.CanProcessEndOfDay, policy => policy.RequireRole(Roles.ShareUnitSectionHead, Roles.ITAdmin));
-        //});
-
+     
         return services;
     }
 }

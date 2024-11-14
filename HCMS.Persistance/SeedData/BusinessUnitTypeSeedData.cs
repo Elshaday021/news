@@ -1,4 +1,4 @@
-﻿using HCMS.Domain.BusinessUnit;
+﻿using HCMS.Domain;
 using HCMS.Domain.Enum;
 using HCMS.Persistance.DBContext;
 

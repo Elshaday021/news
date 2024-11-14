@@ -1,4 +1,4 @@
-﻿using HCMS.Domain.Job;
+﻿using HCMS.Domain;  
 using HCMS.Services.DataService;
 using MediatR;
 

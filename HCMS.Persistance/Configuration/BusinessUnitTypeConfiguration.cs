@@ -1,4 +1,4 @@
-﻿using HCMS.Domain.BusinessUnit;
+﻿using HCMS.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,6 +11,7 @@ namespace HCMS.Persistance.Configuration
         {
             builder.HasKey(x => x.Value);
             builder.Property(x => x.Name).HasConversion<string>();
+            builder.Property(x => x.Value).HasConversion<int>();
         }
     }
 }

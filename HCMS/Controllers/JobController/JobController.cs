@@ -3,7 +3,7 @@ using HCMS.Application.Features.Jobs.Command;
 using HCMS.Application.Features.Jobs.JobCatagories;
 using HCMS.Application.Features.Jobs.JobGrades;
 using HCMS.Application.Features.Jobs.JobTitles;
-using HCMS.Domain.Job;
+using HCMS.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

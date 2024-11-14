@@ -1,7 +1,6 @@
-﻿using HCMS.Domain.BusinessUnit;
+﻿
 using HCMS.Domain.EmailTemplet;
 using HCMS.Domain;
-using HCMS.Domain.Job;
 using HCMS.Domain.User;
 using HCMS.Services.DataService;
 using Microsoft.AspNetCore.Identity;

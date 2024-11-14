@@ -1,4 +1,4 @@
-﻿using HCMS.Domain.Job;
+﻿using HCMS.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

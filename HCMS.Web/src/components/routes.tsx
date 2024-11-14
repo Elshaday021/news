@@ -10,7 +10,6 @@ import {
 
 import { useAuth } from "../hooks";
 import { Login, MFA } from "../features/user";
-import { Admin } from "../features/HCMSAdmin";
 import Home from "../Home";
 import { BusinessUnitsHome } from "../features/BusinessUnit";
 import { JobCatagoryHome } from "../features/Job/JobCatagory/JobCatagoryHome";
@@ -18,6 +17,7 @@ import { JobGradeHome } from "../features/Job/JobGrade/JobGradeHome";
 import { JobTitleHome } from "../features/Job/JobTitle/JobTitleHome";
 import { EmployeesHome } from "../features/Employee/EmployeeHome";
 import { JobHome } from "../features/Job/Job/JobHome";
+import { ApprovalRequests, ApprovedBusinessUnits, DraftBusinessUnits, RejectedApprovalRequests } from "../features/BusinessUnit/BuisnessUnitGrids";
 
 const AppRoutes = () => {
   const navigate = useNavigate();
@@ -32,15 +32,6 @@ const AppRoutes = () => {
     }
   }, [loggedIn, navigate, matches]);
 
-  // const permissions = usePermission();
-
-  // const isSysAdmin = useMemo(() => {
-  //   return permissions.canCreateOrUpdateUser;
-  // }, [permissions.canCreateOrUpdateUser]);
-
-  // const isShareHead = useMemo(() => {
-  //   return permissions.canProcessEndOfDay;
-  // }, [permissions.canProcessEndOfDay]);
 
   return (
     <Routes>
@@ -49,57 +40,21 @@ const AppRoutes = () => {
 
       <Route path="home" element={<Home />} />
       <Route path="" element={<Home />} />
-      {/* <Route path="admin" element={<Admin />} /> */}
-      <Route path="businessunit" element={<BusinessUnitsHome />} />
-      <Route path="jobcatagory" element={<JobCatagoryHome />} />
-      <Route path="jobgrade" element={<JobGradeHome />} />
-      <Route path="jobtitle" element={<JobTitleHome />} />
-      <Route path="employees" element={<EmployeesHome />} />
-      <Route path="job" element={<JobHome/>} /> 
-      {/* <Route path="test" element={<Test />} /> */}
-
-      {/* <Route path="forgot-password" element={<ForgotPassword />} />
-      <Route element={<AuthenticatedRoutes />}>
-        <Route path="/" element={<Navigate to="/shareholders" replace />} />
-        <Route path="/shareholders" element={<Shareholders />}>
-          <Route index element={<ApprovedShareholders />} />
+      <Route path="/businessunit" element={<BusinessUnitsHome />}>
+          <Route index element={<ApprovedBusinessUnits />} />
           <Route path="approval-requests" element={<ApprovalRequests />} />
           <Route
             path="rejected-approval-requests"
             element={<RejectedApprovalRequests />}
           />
-          <Route path="draft" element={<DraftShareholders />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="draft" element={<DraftBusinessUnits />} />
         </Route>
-        <Route path="/shareholder-detail/:id" element={<ShareholderDetail />}>
-          <Route index element={<SummaryTab />} />
-          <Route path="summary" element={<SummaryTab />} />
-          <Route path="subscriptions" element={<SubscriptionTab />} />
-          <Route path="payments" element={<PaymentTab />} />
-          <Route path="transfers" element={<TransferTab />} />
-          <Route path="dividends" element={<DividendTab />} />
-          <Route path="documents" element={<DocumentsTab />} />
-          <Route path="certificates" element={<CertificateTab />} />
-        </Route>
-        <Route path="/admin/:tab?" element={<Admin />}>
-          <Route index element={<BankAllocation />} />
-          <Route path="par-values" element={<ParValues />} />
-          <Route path="bank-allocation" element={<BankAllocation />} />
-          <Route path="allocations" element={<Allocations />} />
-          <Route path="subscription-groups" element={<SubscriptionGroup />} />
-          <Route path="dividend-setup" element={<DividendSetup />} />
-        </Route>
-        {isSysAdmin && (
-          <Route path="/sys-admin" element={<SysAdminDashboard />}>
-            <Route index element={<Users />} />
-            <Route path="users" element={<Users />}></Route>
-            <Route path="users/:id/:tab?" element={<UserDetail />}></Route>
-            <Route path="new-user" element={<RegisterNewUser />}></Route>
-          </Route>
-        )}
-        <Route path="/reports" element={<ReportsDashboard />}></Route>
-        {isShareHead && <Route path="/endofday" element={<EndOfDaysForm />} />}
-      </Route> */}
+      <Route path="jobcatagory" element={<JobCatagoryHome />} />
+      <Route path="jobgrade" element={<JobGradeHome />} />
+      <Route path="jobtitle" element={<JobTitleHome />} />
+      <Route path="employees" element={<EmployeesHome />} />
+      <Route path="job" element={<JobHome/>} /> 
+
     </Routes>
   );
 };

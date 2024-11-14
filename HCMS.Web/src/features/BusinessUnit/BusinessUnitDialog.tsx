@@ -14,6 +14,7 @@ import {
   BusinessUnitDto,
   CreateBusinessUnitCommand,
   useCreateBusinessUnitMutation,
+  useUpdateBusinessUnitMutation,
 } from "../../app/api/HCMSApi";
 import { useBusinessUnitType } from "./useBusinessUnitType";
 
@@ -21,27 +22,32 @@ const emptyBusinessUnitData = {
   businessUnitName: "",
   parentId: "",
 } as any;
-export const BusinessUnitDialog = ({ onClose }: { onClose: () => void }) => {
+export const BusinessUnitDialog = ({ onClose ,title,businessUnit}: { onClose: () => void; title:string;businessUnit?:BusinessUnitDto }) => {
   const [businessUnitData, setBusinessUnit] =
-    useState<CreateBusinessUnitCommand>();
+    useState<BusinessUnitDto>();
 
   const [addBusinessUnit] = useCreateBusinessUnitMutation();
-
+  const[updateBusinessUnit]=useUpdateBusinessUnitMutation();
   const { businessUnitLookups } = useBusinessUnit();
   const { businessUnitTypeLookups } = useBusinessUnitType();
 
   useEffect(() => {
     setBusinessUnit({
       ...emptyBusinessUnitData,
-      ...businessUnitData,
+      ...businessUnit,
     });
-  }, [emptyBusinessUnitData, businessUnitData]);
+  }, [businessUnit]);
 
   const handleSubmit = useCallback(
-    (values: CreateBusinessUnitCommand) => {
+    (values: BusinessUnitDto) => {
+      (businessUnit?.id
+        ? updateBusinessUnit({
+            updateBusinessUnitCommand: values,
+          })
+          :
       addBusinessUnit({
         createBusinessUnitCommand: values,
-      })
+      }))
         .unwrap()
         .then(onClose);
     },
@@ -56,14 +62,14 @@ export const BusinessUnitDialog = ({ onClose }: { onClose: () => void }) => {
     >
       {!!businessUnitData && (
         <Formik
-          initialValues={businessUnitData}
+          initialValues={businessUnitData as any}
           enableReinitialize={true}
           onSubmit={handleSubmit}
           //validationSchema={validationSchema}
           validateOnChange={true}
         >
           <Form>
-            <DialogHeader title="Business Unit" onClose={onClose} />
+            <DialogHeader title={title} onClose={onClose} />
             <DialogContent dividers={true}>
               <Grid container spacing={2}>
                 {/* {errors && (

@@ -8,3 +8,9 @@ export enum MartialStatus {
   Divorced = 3,
   Widowed = 4,
 }
+export enum ApprovalStatus {
+  Draft = 1,
+  Submitted = 2,
+  Rejected = 3,
+  Approved = 4,
+}

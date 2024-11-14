@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HCMS.Domain.Enum;
+using System.ComponentModel.DataAnnotations;
 
-namespace HCMS.Domain.BusinessUnit
+namespace HCMS.Domain
 {
     public class BusinessUnit
     {
@@ -9,10 +10,12 @@ namespace HCMS.Domain.BusinessUnit
         public string BusinessUnitID { get; set; }
         public string Name { get; set; }
         public int ParentId { get; set; }
-        public int Type { get; set; }
+        public BusinessUnitTypeEnum Type { get; set; }
         public string AreaCode { get; set; }
         public string Address { get; set; }
         public int? StaffStrength { get; set; }
+        public ApprovalStatus ApprovalStatus { get; set; }= ApprovalStatus.Draft;
+        public BusinessUnitType BusinessUnitType { get; set; }
 
     }
 }

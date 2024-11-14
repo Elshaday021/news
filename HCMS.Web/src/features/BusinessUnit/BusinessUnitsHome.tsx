@@ -1,15 +1,17 @@
 import AddIcon from "@mui/icons-material/Add";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Divider, Grid, Paper, Typography } from "@mui/material";
 import { useState } from "react";
 import { PageHeader } from "../../components/PageHeader";
 import { BusinessUnitDialog } from "./BusinessUnitDialog";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import GroupsIcon from "@mui/icons-material/Groups";
 import { BusinessUnitList } from "./BusinessUnitList";
 import { useBusinessUnit } from "./useBusinessUnits";
-import { useGetAllBusinessUnitsQuery } from "../../app/api";
+import { useGetAllBusinessUnitsQuery, useGetBusinessUnitCountPerApprovalStatusQuery } from "../../app/api";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import SetupMenu from "../Job/SetupMenu";
+import { BusinessUnitListTabs } from "./BuisnessUnitGrids/BusinessUnitListTabs";
 
 const Header = ({ text }: { text: string }) => (
   <Typography
@@ -22,16 +24,15 @@ const Header = ({ text }: { text: string }) => (
 );
 
 export const BusinessUnitsHome = () => {
-  // const { allocations } = useAllocations();
   const [dialogOpened, setDialogOpened] = useState(false);
-  // const permissions = usePermission();
-  const { data } = useGetAllBusinessUnitsQuery();
-
+  const { data:businessUnits  } = useGetAllBusinessUnitsQuery();
+  const { data: businessUnitCounts } =
+    useGetBusinessUnitCountPerApprovalStatusQuery();
   const navigate = useNavigate();
   return (
     <Box>
-      <SetupMenu />
-      <Box sx={{ display: "flex" }}>
+           <SetupMenu />
+           <Box sx={{ display: "flex" }}>
         <PageHeader
           title={"Buisness Units"}
           icon={<BusinessCenterIcon sx={{ fontSize: 15, color: "#1976d2" }} />}
@@ -55,26 +56,24 @@ export const BusinessUnitsHome = () => {
               borderColor: "#1976d2", // Border color on hover
             },
           }}
-          //    disabled={!permissions.canCreateOrUpdateAllocation}
         >
           Add New Business Unit
         </Button>
       </Box>
-
+      <Paper sx={{ p: 2, flex: 1 }}>
+        <BusinessUnitListTabs counts={businessUnitCounts} />
+        <Divider />
+        <Outlet />
+      </Paper>
       {dialogOpened && (
         <BusinessUnitDialog
           onClose={() => {
             setDialogOpened(false);
+            //refetch();
           }}
-          // title="Add Allocation"
+           title="Add BusinesUnit"
         />
       )}
-      <Box>
-        <BusinessUnitList
-          items={data}
-          // suppressActionColumn={!!draft?.length}
-        />
-      </Box>
     </Box>
   );
 };
