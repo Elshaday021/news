@@ -8,11 +8,11 @@ namespace HCMS.Domain.Enum
 {
     public enum BusinessUnitTypeEnum
     {
-        District=1,
-        Branch = 2,
-        Department = 3,
-        Division = 4,
-        Section = 5
+        Bank=1,
+        ChiefOffice=2,
+        DepartmentorDistrict = 3,
+        BranchorDivision = 4,
+        Section = 5,
   
     }
 }

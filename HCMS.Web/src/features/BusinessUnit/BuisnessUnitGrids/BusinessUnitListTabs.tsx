@@ -48,7 +48,7 @@ export const BusinessUnitListTabs = ({
 }) => {
   const tabs = useMemo(() => getTabs(counts), [counts]);
   const getCurrentTabIndex = () => {
-    const tabIndex = tabs.findIndex((t) => t.href === location.pathname);
+    const tabIndex = tabs.findIndex((t) => t.href === window.location.pathname);
     return tabIndex >= 0 ? tabIndex : 0;
   };
 

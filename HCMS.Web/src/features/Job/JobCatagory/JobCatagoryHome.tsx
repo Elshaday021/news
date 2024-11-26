@@ -58,6 +58,7 @@ export const JobCatagoryHome = () => {
         <JobCatagoryDialog
           onClose={() => {
             setDialogOpened(false);
+            window.location.reload();
           }}
         />
       )}

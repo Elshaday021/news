@@ -39,6 +39,7 @@ export const EmployeesHome = () => {
         <EmployeeDialog
           onClose={() => {
             setDialogOpened(false);
+            window.location.reload();
           }}
         />
       )}

@@ -58,6 +58,7 @@ export const JobGradeHome = () => {
         <JobGradeDialog
           onClose={() => {
             setDialogOpened(false);
+            window.location.reload();
           }}
         />
       )}

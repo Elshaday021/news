@@ -69,7 +69,7 @@ export const BusinessUnitsHome = () => {
         <BusinessUnitDialog
           onClose={() => {
             setDialogOpened(false);
-            //refetch();
+            window.location.reload();
           }}
            title="Add BusinesUnit"
         />

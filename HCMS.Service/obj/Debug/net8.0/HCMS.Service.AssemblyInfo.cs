@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HCMS.Service")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4d1e8a4b108aa2729fa8dbc74d0d58bf8b3224a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("HCMS.Service")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HCMS.Service")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

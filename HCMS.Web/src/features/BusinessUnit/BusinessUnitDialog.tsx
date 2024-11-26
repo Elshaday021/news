@@ -49,7 +49,10 @@ export const BusinessUnitDialog = ({ onClose ,title,businessUnit}: { onClose: ()
         createBusinessUnitCommand: values,
       }))
         .unwrap()
-        .then(onClose);
+        .then(()=>{onClose();
+          window.location.reload();
+          }
+        )
     },
     [onClose, addBusinessUnit]
   );

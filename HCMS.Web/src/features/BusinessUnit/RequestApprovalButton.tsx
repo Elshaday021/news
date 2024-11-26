@@ -12,6 +12,7 @@ export const RequestApprovalButton = ({ id }: { id: number }) => {
   const onDialogClose = useCallback(() => {
     submitReset();
     setDialogOpened(false);
+    window.location.reload();
   }, [submitReset]);
 
   const handleSubmit = useCallback(

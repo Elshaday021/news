@@ -11,10 +11,9 @@ namespace HCMS.Persistance.SeedData
             if (context.BusinessUnitTypes.Any()) return;
             var businessUnitTypes = new List<BusinessUnitType>()
             {
-                new BusinessUnitType() {Value=BusinessUnitTypeEnum.District ,Name="District",Description="District" },
-                new BusinessUnitType() {Value=BusinessUnitTypeEnum.Branch ,Name="Branch",Description="Branch" },
-                new BusinessUnitType() {Value=BusinessUnitTypeEnum.Department ,Name="Department",Description="Department" },
-                new BusinessUnitType() {Value=BusinessUnitTypeEnum.Division ,Name="Division",Description="Division" },
+                new BusinessUnitType() {Value=BusinessUnitTypeEnum.ChiefOffice ,Name="ChiefOffice",Description="ChiefOffice" },
+                new BusinessUnitType() {Value=BusinessUnitTypeEnum.DepartmentorDistrict ,Name="DepartmentorDistrict",Description="DepartmentorDistrict" },
+                new BusinessUnitType() {Value=BusinessUnitTypeEnum.BranchorDivision ,Name="BranchorDivision",Description="BranchorDivision" },
                 new BusinessUnitType() {Value=BusinessUnitTypeEnum.Section ,Name="Section",Description="Section" }
             };
             await context.BusinessUnitTypes.AddRangeAsync(businessUnitTypes);

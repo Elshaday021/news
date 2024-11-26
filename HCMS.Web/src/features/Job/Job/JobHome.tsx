@@ -1,12 +1,12 @@
 import { Box, Button } from "@mui/material"
 import { JobDialog } from "./JobDialog"
 import { useState } from "react";
-import SetupMenu from "../SetupMenu";
 import { PageHeader } from "../../../components/PageHeader";
 import WorkIcon from "@mui/icons-material/Work";
 import AddIcon from "@mui/icons-material/Add";
 import { JobList } from "./JobList";
 import { useGetAllJobListQuery } from "../../../app/api";
+import SetupMenu from "../SetupMenu";
 
 export const JobHome = ()=>{
     const[dialogOpened, setDialogOpened]=useState(false);
@@ -42,7 +42,11 @@ export const JobHome = ()=>{
         </Button>
                     {dialogOpened && (
                 <JobDialog 
-                onClose={()=>{setDialogOpened(false)}}
+                onClose={()=>{setDialogOpened(false)
+                  window.location.reload();
+                }
+              }
+                
                 />)}
 
 </Box>

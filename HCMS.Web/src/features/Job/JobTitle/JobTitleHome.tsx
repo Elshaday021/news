@@ -58,6 +58,7 @@ export const JobTitleHome = () => {
         <JobTitleDialog
           onClose={() => {
             setDialogOpened(false);
+            window.location.reload();
           }}
         />
       )}

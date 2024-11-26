@@ -16,6 +16,7 @@ export const ApproveOrRejectRequestButton = ({ id }: { id: number }) => {
     approveReset();
     rejectReset();
     setDialogOpened(false);
+    window.location.reload();
   }, [approveReset, rejectReset]);
 
   const handleSubmit = useCallback(
