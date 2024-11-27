@@ -1,7 +1,7 @@
 # Ignore build and obj directories
 **/bin/
 **/obj/
-**/.vs/
+
 
 # Ignore NuGet-related files
 **/*.nuget.g.props
