@@ -1,4 +1,6 @@
 ﻿using HCMS.Application.Features.BusinessUnits.Commands.CreateBusinessUnit;
+using HCMS.Application.Features.BusinessUnits.Services;
+using HCMS.Service.ValueConverterService;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -13,6 +15,7 @@ public static class ApplicationServiceRegistration
         {
             config.RegisterServicesFromAssembly(typeof(CreateBusinessUnitCommand).Assembly);
         });
+        services.AddScoped<IGenerateBusinessUnitCodeService, GenerateBusinessUnitCodeService>();
 
         return services;
     }

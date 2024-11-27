@@ -11,6 +11,7 @@ namespace HCMS.Persistance.SeedData
             if (context.BusinessUnitTypes.Any()) return;
             var businessUnitTypes = new List<BusinessUnitType>()
             {
+                 new BusinessUnitType() {Value=BusinessUnitTypeEnum.Bank ,Name="Bank",Description="Bank" },
                 new BusinessUnitType() {Value=BusinessUnitTypeEnum.ChiefOffice ,Name="ChiefOffice",Description="ChiefOffice" },
                 new BusinessUnitType() {Value=BusinessUnitTypeEnum.DepartmentorDistrict ,Name="DepartmentorDistrict",Description="DepartmentorDistrict" },
                 new BusinessUnitType() {Value=BusinessUnitTypeEnum.BranchorDivision ,Name="BranchorDivision",Description="BranchorDivision" },

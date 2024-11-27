@@ -11,7 +11,7 @@ namespace HCMS.Persistance.SeedData
             if (context.BusinessUnits.Any()) return;
             var businessUnits = new List<BusinessUnit>()
             {
-                new BusinessUnit() { Name="BerhanBank"  ,BusinessUnitID="Bank" ,ParentId=1, Type=BusinessUnitTypeEnum.Bank,AreaCode="001",Address="Addis Ababa Bole", },
+                new BusinessUnit() { Name="BerhanBank"  ,BusinessUnitID="Bank" ,BusinessUnitCode="01",ParentId=1, Type=BusinessUnitTypeEnum.Bank,AreaCode="001",Address="Addis Ababa Bole",ApprovalStatus=ApprovalStatus.Approved },
 
             };
             await context.BusinessUnits.AddRangeAsync(businessUnits);

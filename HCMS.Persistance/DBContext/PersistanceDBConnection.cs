@@ -1,5 +1,7 @@
-﻿using HCMS.ApplicationLayer.UserAccount;
+﻿using AutoMapper;
+using HCMS.ApplicationLayer.UserAccount;
 using HCMS.Domain.User;
+using HCMS.Service.ValueConverterService;
 using HCMS.Services.DataService;
 using HCMS.Services.EmailService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,6 +21,7 @@ namespace HCMS.Persistance.DBContext
             services.AddScoped<IDataService, HCMSDBContext>();
             services.AddScoped<IExchangeEmail, Exchange>();
             services.AddScoped<IUserAccount, UserAccountRegister>();
+            services.AddScoped<IValueConvertor, ValueConvertor>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

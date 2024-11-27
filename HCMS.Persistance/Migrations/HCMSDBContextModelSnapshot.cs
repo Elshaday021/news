@@ -43,6 +43,10 @@ namespace HCMS.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("BusinessUnitCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("BusinessUnitID")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

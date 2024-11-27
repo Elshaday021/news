@@ -1,7 +1,9 @@
-bin
-obj
-migrations
-.vs
+bin.*
+obj.*
+migrations.*
+.vs.*
+*dll
+
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 

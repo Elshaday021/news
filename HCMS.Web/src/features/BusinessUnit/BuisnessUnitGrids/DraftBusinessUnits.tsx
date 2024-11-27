@@ -18,6 +18,7 @@ import { ApprovalStatus } from "../../../app/api/enums";
 import { BusinessUnitDialog } from "../BusinessUnitDialog";
 import { RequestApprovalButton } from "../RequestApprovalButton";
 import { ApproveOrRejectRequestButton } from "../ApproveOrRejectRequestButton";
+import { Pagination } from "../../../components/Pagination";
 
 export const DraftBusinessUnits = () => {
   const [pagination, setPagination] = useState<{
@@ -63,13 +64,13 @@ export const DraftBusinessUnits = () => {
                       {item.name}
                     </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
-                      {item.parentBusinessUnit?.name}
+                      {item.parentBusinessUnitName}
                     </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.businessUnitID}
                     </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
-                      {item.type}
+                      {item.businessUnitTypeName}
                     </TableCell>
                     <TableCell>
                     <Box
@@ -107,7 +108,13 @@ export const DraftBusinessUnits = () => {
           </Table>
         </TableContainer>
       </Paper>
-      
+      <Pagination
+      pageNumber={pagination.pageNumber}
+      pageSize={pagination.pageSize}
+      onChange={setPagination}
+      totalRowsCount={counts?.drafts}
+      rowsPerPageOptions={[10,20,50]}
+      />
       {selectedBusinessUnit && (
         <BusinessUnitDialog
         businessUnit={selectedBusinessUnit}

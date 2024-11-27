@@ -64,7 +64,7 @@ export const BusinessUnitList = ({
                       {item.name}
                     </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
-                      {item.parentBusinessUnit?.name}
+                      {item.parentBusinessUnitName}
                     </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.businessUnitID}

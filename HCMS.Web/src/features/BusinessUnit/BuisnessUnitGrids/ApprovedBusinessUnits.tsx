@@ -18,6 +18,7 @@ import { ApprovalStatus } from "../../../app/api/enums";
 import { BusinessUnitDialog } from "../BusinessUnitDialog";
 import { RequestApprovalButton } from "../RequestApprovalButton";
 import { ApproveOrRejectRequestButton } from "../ApproveOrRejectRequestButton";
+import { Pagination } from "../../../components/Pagination";
 
 export const ApprovedBusinessUnits = () => {
   const [pagination, setPagination] = useState<{
@@ -34,6 +35,7 @@ export const ApprovedBusinessUnits = () => {
     pageSize: pagination.pageSize,
     status: ApprovalStatus.Approved,
   });
+  console.log(items);
   const [selectedBusinessUnit, setSelectedBusinessUnit] =
     useState<BusinessUnitDto>();
   const isLoading = isCountsLoading || isListLoading;
@@ -63,13 +65,13 @@ export const ApprovedBusinessUnits = () => {
                       {item.name}
                     </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
-                      {item.parentBusinessUnit?.name}
+                      {item.parentBusinessUnitName}
                     </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.businessUnitID}
                     </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
-                      {item.type}
+                      {item.businessUnitTypeName}
                     </TableCell>
                     <TableCell>
                     <Box
@@ -90,7 +92,7 @@ export const ApprovedBusinessUnits = () => {
                                 )}
                               </>
                             )}
-                            {item.approvalStatus===(ApprovalStatus.Draft||ApprovalStatus.Rejected)&&( 
+                            {item.approvalStatus!==(ApprovalStatus.Submitted)&&( 
                     <Button
                                 size="small"
                                 onClick={() => setSelectedBusinessUnit(item)}
@@ -107,7 +109,13 @@ export const ApprovedBusinessUnits = () => {
           </Table>
         </TableContainer>
       </Paper>
-      
+      <Pagination
+      pageNumber={pagination.pageNumber}
+      pageSize={pagination.pageSize}
+      onChange={setPagination}
+      totalRowsCount={counts?.approved}
+      rowsPerPageOptions={[10,20,50]}
+      />
       {selectedBusinessUnit && (
         <BusinessUnitDialog
         businessUnit={selectedBusinessUnit}

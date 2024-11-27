@@ -1,4 +1,6 @@
-﻿using HCMS.Domain;
+﻿using HCMS.Application.Features.BusinessUnits.Models;
+using HCMS.Application.Features.BusinessUnits.Services;
+using HCMS.Domain;
 using HCMS.Domain.Enum;
 using HCMS.Service.ValueConverterService;
 using HCMS.Services.DataService;
@@ -7,29 +9,32 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HCMS.Application.Features.BusinessUnits.Commands.CreateBusinessUnit
 {
-    public record CreateBusinessUnitCommand( string BusinessUnitName, int ParentId, BusinessUnitTypeEnum businessUnitTypeId, string AreaCode ,string Address,int? StaffStrength ) : IRequest<int>;
+    public record CreateBusinessUnitCommand( string Name, int ParentId, BusinessUnitTypeEnum Type, string AreaCode ,string Address,int? StaffStrength ) : IRequest<int>;
 
     public class CreateBusinessUnitCommandHandler : IRequestHandler<CreateBusinessUnitCommand, int>
     {
         private readonly IDataService dataService;
         private readonly IValueConvertor valueConvertor;
+        private readonly IGenerateBusinessUnitCodeService generateBusinessUnitCodeService;
 
-        public CreateBusinessUnitCommandHandler(IDataService dataService, IValueConvertor valueConvertor)
+        public CreateBusinessUnitCommandHandler(IDataService dataService, IValueConvertor valueConvertor,IGenerateBusinessUnitCodeService generateBusinessUnitCodeService)
         {
             this.dataService = dataService;
             this.valueConvertor = valueConvertor;
+            this.generateBusinessUnitCodeService= generateBusinessUnitCodeService;
         }
 
         public async Task<int> Handle(CreateBusinessUnitCommand request, CancellationToken cancellationToken)
         {
-            var businessUnitId = await GenerateBusinessUnitId(request);
+            var businessUnitId = await generateBusinessUnitCodeService.GenerateBusinessUnitCode(request);
 
             var businessUnit = new BusinessUnit()
             {
-                BusinessUnitID = businessUnitId,
-                Name = request.BusinessUnitName,
+                BusinessUnitID = businessUnitId.BusinessUnitId,
+                BusinessUnitCode=businessUnitId.BusinessUnitCode,
+                Name = request.Name,
                 ParentId = request.ParentId,
-                Type=request.businessUnitTypeId,
+                Type=request.Type,
                 AreaCode=request.AreaCode,
                 Address=request.Address,
                 StaffStrength=request.StaffStrength,
@@ -39,23 +44,6 @@ namespace HCMS.Application.Features.BusinessUnits.Commands.CreateBusinessUnit
             await dataService.SaveAsync(cancellationToken);
             return businessUnit.Id;
         }
-        public async Task<string> GenerateBusinessUnitId (CreateBusinessUnitCommand request)
-        {
 
-            var businessUnitList = await dataService.BusinessUnits.ToListAsync();
-            var parentBuisnessUnit = businessUnitList.Where(bu => bu.Id == request.ParentId).FirstOrDefault();
-            var gParentBusinessUnit = businessUnitList.Where(bu => bu.Id == parentBuisnessUnit.ParentId).FirstOrDefault();
-            if (request.businessUnitTypeId == BusinessUnitTypeEnum.ChiefOffice)
-            {
-
-            }
-            var BusinessUnitID = string.Concat(
-                        new string(gParentBusinessUnit.Name.Take(5).ToArray()), "-",
-                        new string(parentBuisnessUnit.Name.Take(5).ToArray() ?? null), "-",
-                        new string(parentBuisnessUnit.Name.Take(5).ToArray() ?? null), "-",
-                        new string(request.BusinessUnitName.Take(5).ToArray() ?? null)
-                    );
-            return "test";
-        }
     }
 }

@@ -9,16 +9,16 @@ namespace HCMS.Service.ValueConverterService
 {
     public class ValueConvertor:IValueConvertor
     {
-        public Task<int> TwoDigitConvertorMethod(int value)
+        public Task<string> TwoDigitConvertorMethod(int value)
         {
             var twoDigit = value.ToString("D2");
-            return Task.FromResult(int.Parse(twoDigit));
+            return Task.FromResult(twoDigit);
         }
 
-        public Task<int> ThreeDigitConvertorMethod(int value)
+        public Task<string> ThreeDigitConvertorMethod(int value)
         {
             var twoDigit = value.ToString("D3");
-            return Task.FromResult(int.Parse(twoDigit));
+            return Task.FromResult(twoDigit);
         }
     }
   

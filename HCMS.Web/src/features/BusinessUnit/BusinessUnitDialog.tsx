@@ -84,12 +84,12 @@ export const BusinessUnitDialog = ({ onClose ,title,businessUnit}: { onClose: ()
                 <Grid item xs={12}>
                 <Box sx={{ display: "flex", gap: 2 }}>
                   <FormTextField
-                    name="businessUnitName"
+                    name="name"
                     label="Business Unit Name"
                     type="text"
                   />
                     <FormSelectField
-                      name="businessUnitTypeId"
+                      name="type"
                       label="Business Unit Type "
                       type="number"
                       options={businessUnitTypeLookups}

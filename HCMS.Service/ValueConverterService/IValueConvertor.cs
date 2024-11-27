@@ -8,7 +8,7 @@ namespace HCMS.Service.ValueConverterService
 {
     public interface IValueConvertor
     {
-        Task<int> TwoDigitConvertorMethod(int value);
-        Task<int> ThreeDigitConvertorMethod(int value);
+        Task<string> TwoDigitConvertorMethod(int value);
+        Task<string> ThreeDigitConvertorMethod(int value);
     }
 }

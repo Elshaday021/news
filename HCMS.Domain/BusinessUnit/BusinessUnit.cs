@@ -11,6 +11,7 @@ namespace HCMS.Domain
         public string Name { get; set; }
         public int ParentId { get; set; }
         public BusinessUnitTypeEnum Type { get; set; }
+        public string BusinessUnitCode { get; set; }
         public string AreaCode { get; set; }
         public string Address { get; set; }
         public int? StaffStrength { get; set; }

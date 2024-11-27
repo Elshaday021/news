@@ -300,31 +300,14 @@ export type VerificationCode = {
 };
 export type BusinessUnitTypeEnum = 1 | 2 | 3 | 4 | 5;
 export type ApprovalStatus = 1 | 2 | 3 | 4;
-export type BusinessUnitType = {
-  value?: BusinessUnitTypeEnum;
-  name?: string | null;
-  description?: string | null;
-};
-export type BusinessUnit = {
-  id?: number;
-  businessUnitID?: string | null;
-  name?: string | null;
-  parentId?: number;
-  type?: BusinessUnitTypeEnum;
-  areaCode?: string | null;
-  address?: string | null;
-  staffStrength?: number | null;
-  approvalStatus?: ApprovalStatus;
-  businessUnitType?: BusinessUnitType;
-};
 export type BusinessUnitDto = {
   id?: number;
   businessUnitID?: string | null;
   name?: string | null;
-  parentBusinessUnit?: BusinessUnit;
+  parentBusinessUnitName?: string | null;
   parentId?: number;
-  type?: string | null;
-  businessUnitTypeId?: BusinessUnitTypeEnum;
+  businessUnitTypeName?: string | null;
+  type?: BusinessUnitTypeEnum;
   areaCode?: string | null;
   address?: string | null;
   staffStrength?: number | null;
@@ -350,9 +333,9 @@ export type BusinessUnitCountsByStatus = {
   drafts?: number;
 };
 export type CreateBusinessUnitCommand = {
-  businessUnitName?: string | null;
+  name?: string | null;
   parentId?: number;
-  businessUnitTypeId?: BusinessUnitTypeEnum;
+  type?: BusinessUnitTypeEnum;
   areaCode?: string | null;
   address?: string | null;
   staffStrength?: number | null;
@@ -365,9 +348,9 @@ export type SubmitBusinessUnitCommand = {
 };
 export type UpdateBusinessUnitCommand = {
   id?: number;
-  businessUnitName?: string | null;
+  name?: string | null;
   parentId?: number;
-  businessUnitTypeId?: BusinessUnitTypeEnum;
+  type?: BusinessUnitTypeEnum;
   areaCode?: string | null;
   address?: string | null;
   staffStrength?: number | null;
@@ -439,6 +422,11 @@ export type JobTitleDto = {
   description?: string | null;
   jobCatagory?: string | null;
   jobGrade?: string | null;
+};
+export type BusinessUnitType = {
+  value?: BusinessUnitTypeEnum;
+  name?: string | null;
+  description?: string | null;
 };
 export type LookupDto = {
   jobTitles?: JobTitleDto[] | null;
