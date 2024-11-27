@@ -1,7 +1,9 @@
-bin.*
-obj.*
-migrations.*
-.vs.*
+
+bin/
+obj/
+.vs/
+migrations/
+
 *dll
 
 
