@@ -3,6 +3,13 @@
 **/obj/
 **/.vs/
 
+# Ignore NuGet-related files
+**/*.nuget.g.props
+**/*.nuget.dgspec.json
+**/*.assets.cache
+**/*.project.nuget.cache
+
+
 bin/
 obj/
 .vs/
