@@ -1,6 +1,0 @@
-@HCMS_HostAddress = http://localhost:5023
-
-GET {{HCMS_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
