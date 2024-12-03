@@ -4,10 +4,8 @@ using HCMS.Domain.User;
 using HCMS.Persistance.DBContext;
 using HCMS.Persistance.SeedData;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using SMS.Persistence;
 
-namespace SMS.Api
+namespace HCMS.Api
 {
     public static class DataSeeder
     {
@@ -22,7 +20,7 @@ namespace SMS.Api
                     {
                         var userManager = services.GetRequiredService<UserManager<HRUser>>();
                         var roleManager = services.GetRequiredService<RoleManager<HRRole>>();
-                        await Seed.SeedData( context , userManager , roleManager);
+                        await Seed.SeedData(context, userManager, roleManager);
                     }
                     catch (Exception ex)
                     {

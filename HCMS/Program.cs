@@ -1,9 +1,10 @@
+using HCMS.Api;
+using HCMS.Api.Filters;
 using HCMS.API.Configurations;
+using HCMS.Application;
 using HCMS.ApplicationLayer.UserAccount;
+using HCMS.Infrastructure;
 using HCMS.Persistance.DBContext;
-using SMS.Api;
-using SMS.Application;
-using SMS.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<IUserAccount, UserAccountRegister>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddScoped<ApiExceptionFilterAttribute>();
+
 builder.Services.AddEndpointsApiExplorer()
     .AddSwagger()
       .AddInfrastructureService()

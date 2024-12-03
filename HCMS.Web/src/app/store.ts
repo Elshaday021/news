@@ -7,9 +7,11 @@ import {
 } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { HCMSApi } from "./api/HCMSApi";
+import { notificationReducer } from "../features/notification";
 
 export const store = configureStore({
   reducer: {
+    notification: notificationReducer,
     [HCMSApi.reducerPath]: HCMSApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {

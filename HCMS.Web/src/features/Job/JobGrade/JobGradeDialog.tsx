@@ -2,6 +2,7 @@ import { Form, Formik } from "formik";
 import { useCallback, useEffect, useState } from "react";
 import {
   DialogHeader,
+  Errors,
   FormSelectField,
   FormTextField,
 } from "../../../components";
@@ -14,6 +15,7 @@ import {
   Grid,
 } from "@mui/material";
 import { JobGrade, useAddJobGradeMutation } from "../../../app/api/HCMSApi";
+import { useAlert } from "../../notification";
 
 const emptyjobGradeData = {
   name: "",
@@ -21,7 +23,8 @@ const emptyjobGradeData = {
 } as any;
 export const JobGradeDialog = ({ onClose }: { onClose: () => void }) => {
   const [jobGradeData, setJobGrade] = useState<JobGrade>();
-  const [addJobGrade] = useAddJobGradeMutation();
+  const [addJobGrade, {error: AddJobGradeError}] = useAddJobGradeMutation();
+  const { showSuccessAlert ,showErrorAlert} = useAlert();
 
   useEffect(() => {
     setJobGrade({
@@ -36,10 +39,18 @@ export const JobGradeDialog = ({ onClose }: { onClose: () => void }) => {
         addJobGradeCommand: values,
       })
         .unwrap()
-        .then(onClose);
+        .then(onClose)
+        .catch((error)=>
+          {
+            showErrorAlert(error?.data?.detail)
+          });
     },
     [onClose, addJobGrade]
   );
+
+  const errors = ((AddJobGradeError) as any)?.data
+  ?.errors;
+
   return (
     <Dialog
       scroll={"paper"}
@@ -59,11 +70,11 @@ export const JobGradeDialog = ({ onClose }: { onClose: () => void }) => {
             <DialogHeader title="Add Job Grade" onClose={onClose} />
             <DialogContent dividers={true}>
               <Grid container spacing={2}>
-                {/* {errors && (
+                {errors && (
                   <Grid item xs={12}>
                     <Errors errors={errors as any} />
                   </Grid>
-                )} */}
+                )}
 
                 <Grid item xs={12}>
                   <FormTextField

@@ -4,11 +4,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using SMS.Application;
 
-using SMS.Persistence;
-
-namespace SMS.Infrastructure;
+namespace HCMS.Infrastructure;
 
 public static class InfrastructureServiceRegistration
 {
@@ -55,7 +52,7 @@ public static class InfrastructureServiceRegistration
                 options.ExpireTimeSpan = TimeSpan.FromHours(8);
             });
 
-     
+
         return services;
     }
 }
