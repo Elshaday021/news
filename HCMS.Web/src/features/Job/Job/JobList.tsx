@@ -33,9 +33,9 @@ export const JobList = ({
           <Table size="medium">
             <TableHead>
               <TableRow>
-                <TableCell sx={{fontWeight: 'bold'}}>Business Unit</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}>Job Title</TableCell>
-                     <TableCell sx={{fontWeight: 'bold'}}>Vacant</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Business Unit</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Job Title</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Vacant</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

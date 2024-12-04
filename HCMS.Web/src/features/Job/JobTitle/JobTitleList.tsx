@@ -33,10 +33,10 @@ export const JobTitleList = ({
           <Table size="medium">
             <TableHead>
               <TableRow>
-                <TableCell sx={{fontWeight: 'bold'}}>Name</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}>Job Catagory</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}>Job Grade</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}>Description</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Job Catagory</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Job Grade</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Description</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

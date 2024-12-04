@@ -8,7 +8,10 @@ import { Outlet, useNavigate } from "react-router-dom";
 import GroupsIcon from "@mui/icons-material/Groups";
 import { BusinessUnitList } from "./BusinessUnitList";
 import { useBusinessUnit } from "./useBusinessUnits";
-import { useGetAllBusinessUnitsQuery, useGetBusinessUnitCountPerApprovalStatusQuery } from "../../app/api";
+import {
+  useGetAllBusinessUnitsQuery,
+  useGetBusinessUnitCountPerApprovalStatusQuery,
+} from "../../app/api";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import SetupMenu from "../Job/SetupMenu";
 import { BusinessUnitListTabs } from "./BuisnessUnitGrids/BusinessUnitListTabs";
@@ -25,20 +28,20 @@ const Header = ({ text }: { text: string }) => (
 
 export const BusinessUnitsHome = () => {
   const [dialogOpened, setDialogOpened] = useState(false);
-  const { data:businessUnits  } = useGetAllBusinessUnitsQuery();
+  const { data: businessUnits } = useGetAllBusinessUnitsQuery();
   const { data: businessUnitCounts } =
     useGetBusinessUnitCountPerApprovalStatusQuery();
   const navigate = useNavigate();
   return (
     <Box>
-           <SetupMenu />
-           <Box sx={{ display: "flex" }}>
+      <SetupMenu />
+      <Box sx={{ display: "flex" }}>
         <PageHeader
           title={"Buisness Units"}
           icon={<BusinessCenterIcon sx={{ fontSize: 15, color: "#1976d2" }} />}
         />
         <Box sx={{ flex: 1 }}></Box>
-        
+
         <Button
           variant="outlined"
           startIcon={<AddIcon />}
@@ -71,7 +74,7 @@ export const BusinessUnitsHome = () => {
             setDialogOpened(false);
             window.location.reload();
           }}
-           title="Add BusinesUnit"
+          title="Add BusinesUnit"
         />
       )}
     </Box>

@@ -2,7 +2,6 @@ import { SxProps } from "@mui/material";
 import { each, isObject, toLower, uniq, unset, upperFirst } from "lodash-es";
 import * as yup from "yup";
 
-
 export type YupSchema<T> = T extends string
   ? yup.StringSchema
   : T extends number
@@ -20,8 +19,6 @@ export type YupShape<T extends object> = {
 };
 
 export const AllowedAmharicCharacters = /^[\u1200-\u137C\s]*$/;
-
-
 
 export const removeEmptyFields = <T extends object>(
   value: T
@@ -43,8 +40,6 @@ export const removeEmptyFields = <T extends object>(
     [K in keyof T]: NonNullable<T[K] | undefined>;
   };
 };
-
-
 
 export const modifiedStyle = {
   borderStyle: "solid",

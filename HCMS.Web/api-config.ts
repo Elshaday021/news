@@ -5,7 +5,6 @@ const config: any = {
   outputFile: "./src/app/api/HCMSApi.ts",
   exportName: "HCMSApi",
   hooks: { queries: true, lazyQueries: true, mutations: true },
-
 };
 
 export default config;

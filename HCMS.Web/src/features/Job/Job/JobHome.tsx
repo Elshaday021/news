@@ -1,5 +1,5 @@
-import { Box, Button } from "@mui/material"
-import { JobDialog } from "./JobDialog"
+import { Box, Button } from "@mui/material";
+import { JobDialog } from "./JobDialog";
 import { useState } from "react";
 import { PageHeader } from "../../../components/PageHeader";
 import WorkIcon from "@mui/icons-material/Work";
@@ -8,19 +8,19 @@ import { JobList } from "./JobList";
 import { useGetAllJobListQuery } from "../../../app/api";
 import SetupMenu from "../SetupMenu";
 
-export const JobHome = ()=>{
-    const[dialogOpened, setDialogOpened]=useState(false);
-    const { data } = useGetAllJobListQuery();
-    return(
-<Box>
+export const JobHome = () => {
+  const [dialogOpened, setDialogOpened] = useState(false);
+  const { data } = useGetAllJobListQuery();
+  return (
+    <Box>
       <SetupMenu />
       <Box sx={{ display: "flex" }}>
-      <PageHeader
+        <PageHeader
           title={"Job List"}
           icon={<WorkIcon sx={{ fontSize: 15, color: "#1976d2" }} />}
         />
-      <Box sx={{ flex: 1 }}></Box>
-      <Button
+        <Box sx={{ flex: 1 }}></Box>
+        <Button
           variant="outlined"
           startIcon={<AddIcon />}
           onClick={() => {
@@ -40,19 +40,18 @@ export const JobHome = ()=>{
         >
           Add New Job
         </Button>
-                    {dialogOpened && (
-                <JobDialog 
-                onClose={()=>{setDialogOpened(false)
-                  window.location.reload();
-                }
-              }
-                
-                />)}
-
-</Box>
-<Box>
+        {dialogOpened && (
+          <JobDialog
+            onClose={() => {
+              setDialogOpened(false);
+              window.location.reload();
+            }}
+          />
+        )}
+      </Box>
+      <Box>
         <JobList items={data} />
       </Box>
-        </Box>
-    )
-}
+    </Box>
+  );
+};

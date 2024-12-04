@@ -1,9 +1,12 @@
 import { useMemo } from "react";
 import { SelectOption } from "../../types";
-import { useGetAllBusinessUnitsQuery, useGetAllLookupsQuery } from "../../app/api/HCMSApi";
+import {
+  useGetAllBusinessUnitsQuery,
+  useGetAllLookupsQuery,
+} from "../../app/api/HCMSApi";
 
 export const useBusinessUnit = () => {
-  const { data:businessUnits } = useGetAllBusinessUnitsQuery();
+  const { data: businessUnits } = useGetAllBusinessUnitsQuery();
 
   const businessUnitLookups = useMemo(
     () =>
@@ -16,5 +19,3 @@ export const useBusinessUnit = () => {
 
   return { businessUnits, businessUnitLookups };
 };
-
-

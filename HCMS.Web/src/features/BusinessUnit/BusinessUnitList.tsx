@@ -38,10 +38,18 @@ export const BusinessUnitList = ({
           <Table size="medium">
             <TableHead>
               <TableRow>
-                <TableCell sx={{fontWeight: 'bold'}}>Name</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}>Parent BusinessUnit</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}> BusinessUnit ID</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}> BusinessUnit Type</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>
+                  Parent BusinessUnit
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>
+                  {" "}
+                  BusinessUnit ID
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>
+                  {" "}
+                  BusinessUnit Type
+                </TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -73,34 +81,35 @@ export const BusinessUnitList = ({
                       {item.type}
                     </TableCell>
                     <TableCell>
-                    <Box
-                            sx={{
-                              display: "flex",
-                              justifyContent: "center",
-                              gap: 1,
-                            }}>
-                    {item.id && (
-                              <>
-                                {item.approvalStatus ===
-                                  ApprovalStatus.Draft && (
-                                  <RequestApprovalButton id={item.id} />
-                                )}
-                                {item.approvalStatus ===
-                                  ApprovalStatus.Submitted && (
-                                  <ApproveOrRejectRequestButton id={item.id} />
-                                )}
-                              </>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          gap: 1,
+                        }}
+                      >
+                        {item.id && (
+                          <>
+                            {item.approvalStatus === ApprovalStatus.Draft && (
+                              <RequestApprovalButton id={item.id} />
                             )}
-                            {item.approvalStatus===(ApprovalStatus.Draft||ApprovalStatus.Rejected)&&( 
-                    <Button
-                                size="small"
-                                onClick={() => setSelectedBusinessUnit(item)}
-                              >
-                                Edit
-                              </Button>
+                            {item.approvalStatus ===
+                              ApprovalStatus.Submitted && (
+                              <ApproveOrRejectRequestButton id={item.id} />
                             )}
-                              </Box>
-                              </TableCell>
+                          </>
+                        )}
+                        {item.approvalStatus ===
+                          (ApprovalStatus.Draft || ApprovalStatus.Rejected) && (
+                          <Button
+                            size="small"
+                            onClick={() => setSelectedBusinessUnit(item)}
+                          >
+                            Edit
+                          </Button>
+                        )}
+                      </Box>
+                    </TableCell>
                   </TableRow>
                 </Fragment>
               ))}
@@ -108,17 +117,16 @@ export const BusinessUnitList = ({
           </Table>
         </TableContainer>
       </Paper>
-      
+
       {selectedBusinessUnit && (
         <BusinessUnitDialog
-        businessUnit={selectedBusinessUnit}
-        onClose={() => {
-          setSelectedBusinessUnit(undefined);
-        }}
-             title="Edit BusinesUnit"
+          businessUnit={selectedBusinessUnit}
+          onClose={() => {
+            setSelectedBusinessUnit(undefined);
+          }}
+          title="Edit BusinesUnit"
         />
       )}
-           
     </Box>
   );
 };

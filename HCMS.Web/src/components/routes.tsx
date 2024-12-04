@@ -17,7 +17,12 @@ import { JobGradeHome } from "../features/Job/JobGrade/JobGradeHome";
 import { JobTitleHome } from "../features/Job/JobTitle/JobTitleHome";
 import { EmployeesHome } from "../features/Employee/EmployeeHome";
 import { JobHome } from "../features/Job/Job/JobHome";
-import { ApprovalRequests, ApprovedBusinessUnits, DraftBusinessUnits, RejectedApprovalRequests } from "../features/BusinessUnit/BuisnessUnitGrids";
+import {
+  ApprovalRequests,
+  ApprovedBusinessUnits,
+  DraftBusinessUnits,
+  RejectedApprovalRequests,
+} from "../features/BusinessUnit/BuisnessUnitGrids";
 
 const AppRoutes = () => {
   const navigate = useNavigate();
@@ -32,7 +37,6 @@ const AppRoutes = () => {
     }
   }, [loggedIn, navigate, matches]);
 
-
   return (
     <Routes>
       <Route path="login" element={<Login />} />
@@ -41,20 +45,19 @@ const AppRoutes = () => {
       <Route path="home" element={<Home />} />
       <Route path="" element={<Home />} />
       <Route path="/businessunit" element={<BusinessUnitsHome />}>
-          <Route index element={<ApprovedBusinessUnits />} />
-          <Route path="approval-requests" element={<ApprovalRequests />} />
-          <Route
-            path="rejected-approval-requests"
-            element={<RejectedApprovalRequests />}
-          />
-          <Route path="draft" element={<DraftBusinessUnits />} />
-        </Route>
+        <Route index element={<ApprovedBusinessUnits />} />
+        <Route path="approval-requests" element={<ApprovalRequests />} />
+        <Route
+          path="rejected-approval-requests"
+          element={<RejectedApprovalRequests />}
+        />
+        <Route path="draft" element={<DraftBusinessUnits />} />
+      </Route>
       <Route path="jobcatagory" element={<JobCatagoryHome />} />
       <Route path="jobgrade" element={<JobGradeHome />} />
       <Route path="jobtitle" element={<JobTitleHome />} />
       <Route path="employees" element={<EmployeesHome />} />
-      <Route path="job" element={<JobHome/>} /> 
-
+      <Route path="job" element={<JobHome />} />
     </Routes>
   );
 };

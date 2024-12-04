@@ -2,7 +2,10 @@ import { Button } from "@mui/material";
 import { useCallback, useMemo, useState } from "react";
 import { removeEmptyFields } from "../../utils";
 import { WorkflowActionDialog } from "../../components/workflow";
-import { useApproveBusinessUnitMutation, useRejectBusinessUnitMutation } from "../../app/api";
+import {
+  useApproveBusinessUnitMutation,
+  useRejectBusinessUnitMutation,
+} from "../../app/api";
 
 export const ApproveOrRejectRequestButton = ({ id }: { id: number }) => {
   const [dialogOpened, setDialogOpened] = useState(false);

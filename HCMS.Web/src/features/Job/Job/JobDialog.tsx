@@ -7,71 +7,75 @@ import { useNavigate } from "react-router-dom";
 import { useBusinessUnit } from "../../BusinessUnit";
 import { useJobTitle } from "../JobTitle/useJobTitle";
 
-const initalValues ={
-    jobTitleId:"1",
-    businessUnitId:""
+const initalValues = {
+    jobTitleId: "1",
+    businessUnitId: ""
 }
-export const JobDialog =({onClose}:{onClose:()=>void} )=>{
-    const [addNewJob]= useAddJobMutation();
-    const{businessUnitLookups}=useBusinessUnit();
-    const{jobTitlesLookups}=useJobTitle();
- 
-    const handleSubmit=useCallback(
-        async(values:AddJobCommand) =>{
+export const JobDialog = ({ onClose }: { onClose: () => void }) => {
+    const [addNewJob] = useAddJobMutation();
+    const { businessUnitLookups } = useBusinessUnit();
+    const { jobTitlesLookups } = useJobTitle();
+
+    const handleSubmit = useCallback(
+        async (values: AddJobCommand) => {
             addNewJob({
-                addJobCommand:values
+                addJobCommand: values
             })
-            .unwrap()
-            .then(onClose);
-        },[addNewJob,onClose]
+                .unwrap()
+                .then(onClose);
+        }, [addNewJob, onClose]
     )
 
-    return(
-  <Dialog 
-        scroll="paper"
-        open={true}
+    return (
+        <Dialog
+            scroll={"paper"}
+            disableEscapeKeyDown={true}
+            maxWidth={"md"}
+            open={true}
+            fullWidth 
         >
-        <Formik
-        initialValues={initalValues}
-        onSubmit={handleSubmit}
-        >
-    <Form>
-    <DialogHeader title="Add New Job" onClose={onClose} />
-    <DialogContent dividers={true}>
-        <Grid container spacing={2}>
-        <Grid item xs={12}>
-        <Box sx={{ display: "flex", gap: 2 }}>
-                <FormSelectField 
-                name="jobTitleId"
-                label="Job Title"
-                type="number"
-                options={jobTitlesLookups}
-                />
-                </Box>
-                     </Grid>
+            <Formik
+                initialValues={initalValues}
+                onSubmit={handleSubmit}
+            >
+                <Form>
+                    <DialogHeader title="Add New Job" onClose={onClose} />
+                    <DialogContent dividers={true}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Box sx={{ display: "flex", gap: 2}}>
+                                    <FormSelectField
+                                        name="jobTitleId"
+                                        label="Job Title"
+                                        type="number"
+                                        options={jobTitlesLookups}
+                                    />
+                                </Box>
+                            </Grid>
 
-                     <Grid item xs={12}>
-                <FormSelectField
-                name="businessUnitId"
-                label="Business Unit"
-                type="number"
-                options={businessUnitLookups}
-                />
-            </Grid>
-</Grid>
-            </ DialogContent>
-            <DialogActions>
-                
-            <Button color="primary" variant="outlined" type="submit">
-                Save
-              </Button>
-              <Button onClick={onClose}>
-                Cancel
-              </Button>
-            </DialogActions>
+                            <Grid item xs={12}>
+                                <FormSelectField
+                                    name="businessUnitId"
+                                    label="Business Unit"
+                                    type="number"
+                                    options={businessUnitLookups}
+                                />
+                            </Grid>
 
-        </Form>
-        </Formik>
+                        </Grid>
+                    </ DialogContent>
+                    <DialogActions>
+
+                        <Button color="primary" variant="outlined" type="submit">
+                            Save
+                        </Button>
+                        <Button onClick={onClose}>
+                            Cancel
+                        </Button>
+                    </DialogActions>
+
+                </Form>
+            </Formik>
         </Dialog>
     )
 }

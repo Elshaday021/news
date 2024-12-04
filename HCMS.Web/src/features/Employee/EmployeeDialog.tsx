@@ -1,6 +1,11 @@
 import { Form, Formik } from "formik";
 import { useCallback, useEffect, useState } from "react";
-import { DialogHeader, FormSelectField, FormTextField, SelectOption } from "../../components";
+import {
+  DialogHeader,
+  FormSelectField,
+  FormTextField,
+  SelectOption,
+} from "../../components";
 import {
   Box,
   Button,
@@ -35,23 +40,29 @@ export const EmployeeDialog = ({ onClose }: { onClose: () => void }) => {
   const [addEmployee] = useCreateEmployeeProfileMutation();
   const { businessUnitLookups } = useBusinessUnit();
   const { jobTitlesLookups } = useJobTitle();
-  const {data:businessUnitJobList}=useGetAllJobListQuery();
+  const { data: businessUnitJobList } = useGetAllJobListQuery();
   useEffect(() => {
     setEmployee({
       ...emptyEmployeeData,
       ...EmployeeData,
     });
   }, [emptyEmployeeData, EmployeeData]);
-console.log();
+  console.log();
   const handleSubmit = useCallback(
     (values: CreateEmployeeProfileCommand) => {
       const birthDate = dayjs(values.birthDate).format("YYYY-MM-DD");
-      const employementDate = values.employementDate && dayjs(values.employementDate).format("YYYY-MM-DD");
+      const employementDate =
+        values.employementDate &&
+        dayjs(values.employementDate).format("YYYY-MM-DD");
 
-      const payload = removeEmptyFields({ ...values, birthDate, employementDate });
+      const payload = removeEmptyFields({
+        ...values,
+        birthDate,
+        employementDate,
+      });
       addEmployee({
         createEmployeeProfileCommand: payload,
-      }) 
+      })
         .unwrap()
         .then(onClose);
     },
@@ -72,116 +83,124 @@ console.log();
           //validationSchema={validationSchema}
           validateOnChange={true}
         >
-        {({values})=>{
-        return(
-    
-          <Form>
-            <DialogHeader title="Add Employee" onClose={onClose} />
-            <DialogContent dividers={true}>
-              <Grid container spacing={2}>
-                {/* {errors && (
+          {({ values }) => {
+            return (
+              <Form>
+                <DialogHeader title="Add Employee" onClose={onClose} />
+                <DialogContent dividers={true}>
+                  <Grid container spacing={2}>
+                    {/* {errors && (
                   <Grid item xs={12}>
                     <Errors errors={errors as any} />
                   </Grid>
                 )} */}
 
-                <Grid item xs={12}>
-                  <Box sx={{ display: "flex", gap: 1 }}>
-                    <FormTextField
-                      name="name"
-                      label="Employee Full Name"
-                      type="text"
-                    />
-                    <FormTextField
-                      name="birthDate"
-                      label="Birth Date"
-                      type="date"
-                    />
-                  </Box>
-                </Grid>
-                <Grid item xs={24}>
-                  <Box sx={{ display: "flex", gap: 1 }}>
-                    <FormSelectField
-                      name="gender"
-                      label="Gender"
-                      options={[
-                        {
-                          label: "Male",
-                          value: enums.Gender.Male,
-                        },
-                        {
-                          label: "Female",
-                          value: enums.Gender.Female,
-                        },
-                      ]}
-                    />
+                    <Grid item xs={12}>
+                      <Box sx={{ display: "flex", gap: 1 }}>
+                        <FormTextField
+                          name="name"
+                          label="Employee Full Name"
+                          type="text"
+                        />
+                        <FormTextField
+                          name="birthDate"
+                          label="Birth Date"
+                          type="date"
+                        />
+                      </Box>
+                    </Grid>
+                    <Grid item xs={24}>
+                      <Box sx={{ display: "flex", gap: 1 }}>
+                        <FormSelectField
+                          name="gender"
+                          label="Gender"
+                          options={[
+                            {
+                              label: "Male",
+                              value: enums.Gender.Male,
+                            },
+                            {
+                              label: "Female",
+                              value: enums.Gender.Female,
+                            },
+                          ]}
+                        />
 
-                    <FormSelectField
-                      name="martialStatus"
-                      label="Martial Status"
-                      options={[
-                        {
-                          label: "Single",
-                          value: enums.MartialStatus.Single,
-                        },
-                        {
-                          label: "Married",
-                          value: enums.MartialStatus.Married,
-                        },
-                        {
-                          label: "Widowed",
-                          value: enums.MartialStatus.Divorced,
-                        },
-                        {
-                          label: "Widowed",
-                          value: enums.MartialStatus.Widowed,
-                        },
-                      ]}
-                    />
-                  </Box>
-                </Grid>
-                <Grid item xs={12}>
-                  <Grid item xs={12}>
-                    <Box sx={{ display: "flex", gap: 2 }}>
-                      <FormSelectField
-                        name="businessUnitID"
-                        label="Business Unit"
-                        type="number"
-                        options={businessUnitLookups}
-                      />
-                      {(values.businessUnitID&&(
-                      <FormSelectField
-                        name="jobId"
-                        label="Job "
-                        type="number"
-                        options={businessUnitJobList
-                          ?.filter((j) => j.businessUnitId === values.businessUnitID && j.isVacant==true)
-                          .map((j) => ({ value: j.id, label: j.jobTitle })) as SelectOption[]}
+                        <FormSelectField
+                          name="martialStatus"
+                          label="Martial Status"
+                          options={[
+                            {
+                              label: "Single",
+                              value: enums.MartialStatus.Single,
+                            },
+                            {
+                              label: "Married",
+                              value: enums.MartialStatus.Married,
+                            },
+                            {
+                              label: "Widowed",
+                              value: enums.MartialStatus.Divorced,
+                            },
+                            {
+                              label: "Widowed",
+                              value: enums.MartialStatus.Widowed,
+                            },
+                          ]}
+                        />
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Grid item xs={12}>
+                        <Box sx={{ display: "flex", gap: 2 }}>
+                          <FormSelectField
+                            name="businessUnitID"
+                            label="Business Unit"
+                            type="number"
+                            options={businessUnitLookups}
+                          />
+                          {values.businessUnitID && (
+                            <FormSelectField
+                              name="jobId"
+                              label="Job "
+                              type="number"
+                              options={
+                                businessUnitJobList
+                                  ?.filter(
+                                    (j) =>
+                                      j.businessUnitId ===
+                                        values.businessUnitID &&
+                                      j.isVacant == true
+                                  )
+                                  .map((j) => ({
+                                    value: j.id,
+                                    label: j.jobTitle,
+                                  })) as SelectOption[]
+                              }
+                            />
+                          )}
+                        </Box>
+                      </Grid>
 
-                      />
-                      
-                    ))}
-                    </Box>
+                      <Grid item xs={12}>
+                        <FormTextField
+                          name="employementDate"
+                          label="Employment Date"
+                          type="date"
+                        />
+                      </Grid>
+                    </Grid>
                   </Grid>
-
-                  <Grid item xs={12}>
-                    <FormTextField
-                      name="employementDate"
-                      label="Employment Date"
-                      type="date"
-                    />
-                  </Grid>
-                </Grid>
-              </Grid>
-            </DialogContent>
-            <DialogActions sx={{ p: 2 }}>
-              <Button onClick={onClose}>Cancel</Button>
-              <Button color="primary" variant="outlined" type="submit">
-                Save
-              </Button>
-            </DialogActions>
-          </Form>
-              )}}
+                </DialogContent>
+                <DialogActions sx={{ p: 2 }}>
+                  <Button onClick={onClose}>Cancel</Button>
+                  <Button color="primary" variant="outlined" type="submit">
+                    Save
+                  </Button>
+                </DialogActions>
+              </Form>
+            );
+          }}
         </Formik>
       )}
     </Dialog>

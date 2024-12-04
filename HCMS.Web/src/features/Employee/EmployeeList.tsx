@@ -33,14 +33,18 @@ export const EmployeeList = ({
           <Table size="medium">
             <TableHead>
               <TableRow>
-              <TableCell sx={{fontWeight: 'bold'}}>Employee ID</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}>Name</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}>Business Unit</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}>Job Title</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}>Gender</TableCell>
-                 <TableCell sx={{fontWeight: 'bold'}}>BirthDate</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}>Employement Date</TableCell> 
-                <TableCell sx={{fontWeight: 'bold'}}>Martial Status</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Employee ID</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Business Unit</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Job Title</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Gender</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>BirthDate</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>
+                  Employement Date
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>
+                  Martial Status
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -58,7 +62,7 @@ export const EmployeeList = ({
                         : {}
                     }
                   >
-                          <TableCell sx={{ verticalAlign: "top", width: 200 }}>
+                    <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.employeeId}
                     </TableCell>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
@@ -70,7 +74,7 @@ export const EmployeeList = ({
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.jobTitle}
                     </TableCell>
-              
+
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.gender}
                     </TableCell>

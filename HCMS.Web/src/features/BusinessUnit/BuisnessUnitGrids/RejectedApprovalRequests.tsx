@@ -13,7 +13,13 @@ import {
 } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Fragment, useState } from "react";
-import { BusinessUnitDto, useGetAllBuisnessUnitListsQuery, useGetAllBusinessUnitsQuery, useGetBusinessUnitCountPerApprovalStatusQuery, useGetBusinessUnitJobListQuery } from "../../../app/api";
+import {
+  BusinessUnitDto,
+  useGetAllBuisnessUnitListsQuery,
+  useGetAllBusinessUnitsQuery,
+  useGetBusinessUnitCountPerApprovalStatusQuery,
+  useGetBusinessUnitJobListQuery,
+} from "../../../app/api";
 import { ApprovalStatus } from "../../../app/api/enums";
 import { BusinessUnitDialog } from "../BusinessUnitDialog";
 import { RequestApprovalButton } from "../RequestApprovalButton";
@@ -31,11 +37,12 @@ export const RejectedApprovalRequests = () => {
   const { data: counts, isLoading: isCountsLoading } =
     useGetBusinessUnitCountPerApprovalStatusQuery();
 
-  const { data:items, isLoading: isListLoading } = useGetAllBuisnessUnitListsQuery({
-    pageNumber: pagination.pageNumber + 1,
-    pageSize: pagination.pageSize,
-    status: ApprovalStatus.Rejected,
-  });
+  const { data: items, isLoading: isListLoading } =
+    useGetAllBuisnessUnitListsQuery({
+      pageNumber: pagination.pageNumber + 1,
+      pageSize: pagination.pageSize,
+      status: ApprovalStatus.Rejected,
+    });
   const [selectedBusinessUnit, setSelectedBusinessUnit] =
     useState<BusinessUnitDto>();
   const isLoading = isCountsLoading || isListLoading;
@@ -47,20 +54,25 @@ export const RejectedApprovalRequests = () => {
           <Table size="medium">
             <TableHead>
               <TableRow>
-                <TableCell sx={{fontWeight: 'bold'}}>Name</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}>Parent BusinessUnit</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}> BusinessUnit ID</TableCell>
-                <TableCell sx={{fontWeight: 'bold'}}> BusinessUnit Type</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>
+                  Parent BusinessUnit
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>
+                  {" "}
+                  BusinessUnit ID
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold" }}>
+                  {" "}
+                  BusinessUnit Type
+                </TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {(items?.items || []).map((item )  => (
+              {(items?.items || []).map((item) => (
                 <Fragment key={item.id}>
-                  <TableRow
-                    hover={false}
-                    key={item.id}
-                  >
+                  <TableRow hover={false} key={item.id}>
                     <TableCell sx={{ verticalAlign: "top", width: 200 }}>
                       {item.name}
                     </TableCell>
@@ -74,34 +86,35 @@ export const RejectedApprovalRequests = () => {
                       {item.businessUnitTypeName}
                     </TableCell>
                     <TableCell>
-                    <Box
-                            sx={{
-                              display: "flex",
-                              justifyContent: "center",
-                              gap: 1,
-                            }}>
-                    {item.id && (
-                              <>
-                                {item.approvalStatus ===
-                                  ApprovalStatus.Draft && (
-                                  <RequestApprovalButton id={item.id} />
-                                )}
-                                {item.approvalStatus ===
-                                  ApprovalStatus.Submitted && (
-                                  <ApproveOrRejectRequestButton id={item.id} />
-                                )}
-                              </>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                          gap: 1,
+                        }}
+                      >
+                        {item.id && (
+                          <>
+                            {item.approvalStatus === ApprovalStatus.Draft && (
+                              <RequestApprovalButton id={item.id} />
                             )}
-                            {item.approvalStatus===(ApprovalStatus.Draft||ApprovalStatus.Rejected)&&( 
-                    <Button
-                                size="small"
-                                onClick={() => setSelectedBusinessUnit(item)}
-                              >
-                                Edit
-                              </Button>
+                            {item.approvalStatus ===
+                              ApprovalStatus.Submitted && (
+                              <ApproveOrRejectRequestButton id={item.id} />
                             )}
-                              </Box>
-                              </TableCell>
+                          </>
+                        )}
+                        {item.approvalStatus ===
+                          (ApprovalStatus.Draft || ApprovalStatus.Rejected) && (
+                          <Button
+                            size="small"
+                            onClick={() => setSelectedBusinessUnit(item)}
+                          >
+                            Edit
+                          </Button>
+                        )}
+                      </Box>
+                    </TableCell>
                   </TableRow>
                 </Fragment>
               ))}
@@ -110,22 +123,21 @@ export const RejectedApprovalRequests = () => {
         </TableContainer>
       </Paper>
       <Pagination
-      pageNumber={pagination.pageNumber}
-      pageSize={pagination.pageSize}
-      onChange={setPagination}
-      totalRowsCount={counts?.rejected}
-      rowsPerPageOptions={[10,20,50]}
+        pageNumber={pagination.pageNumber}
+        pageSize={pagination.pageSize}
+        onChange={setPagination}
+        totalRowsCount={counts?.rejected}
+        rowsPerPageOptions={[10, 20, 50]}
       />
       {selectedBusinessUnit && (
         <BusinessUnitDialog
-        businessUnit={selectedBusinessUnit}
-        onClose={() => {
-          setSelectedBusinessUnit(undefined);
-        }}
-             title="Edit BusinesUnit"
+          businessUnit={selectedBusinessUnit}
+          onClose={() => {
+            setSelectedBusinessUnit(undefined);
+          }}
+          title="Edit BusinesUnit"
         />
       )}
-           
     </Box>
   );
 };

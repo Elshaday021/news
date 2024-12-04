@@ -23,8 +23,8 @@ const emptyjobGradeData = {
 } as any;
 export const JobGradeDialog = ({ onClose }: { onClose: () => void }) => {
   const [jobGradeData, setJobGrade] = useState<JobGrade>();
-  const [addJobGrade, {error: AddJobGradeError}] = useAddJobGradeMutation();
-  const { showSuccessAlert ,showErrorAlert} = useAlert();
+  const [addJobGrade, { error: AddJobGradeError }] = useAddJobGradeMutation();
+  const { showSuccessAlert, showErrorAlert } = useAlert();
 
   useEffect(() => {
     setJobGrade({
@@ -40,16 +40,14 @@ export const JobGradeDialog = ({ onClose }: { onClose: () => void }) => {
       })
         .unwrap()
         .then(onClose)
-        .catch((error)=>
-          {
-            showErrorAlert(error?.data?.detail)
-          });
+        .catch((error) => {
+          showErrorAlert(error?.data?.detail);
+        });
     },
     [onClose, addJobGrade]
   );
 
-  const errors = ((AddJobGradeError) as any)?.data
-  ?.errors;
+  const errors = (AddJobGradeError as any)?.data?.errors;
 
   return (
     <Dialog

@@ -22,12 +22,19 @@ const emptyBusinessUnitData = {
   businessUnitName: "",
   parentId: "",
 } as any;
-export const BusinessUnitDialog = ({ onClose ,title,businessUnit}: { onClose: () => void; title:string;businessUnit?:BusinessUnitDto }) => {
-  const [businessUnitData, setBusinessUnit] =
-    useState<BusinessUnitDto>();
+export const BusinessUnitDialog = ({
+  onClose,
+  title,
+  businessUnit,
+}: {
+  onClose: () => void;
+  title: string;
+  businessUnit?: BusinessUnitDto;
+}) => {
+  const [businessUnitData, setBusinessUnit] = useState<BusinessUnitDto>();
 
   const [addBusinessUnit] = useCreateBusinessUnitMutation();
-  const[updateBusinessUnit]=useUpdateBusinessUnitMutation();
+  const [updateBusinessUnit] = useUpdateBusinessUnitMutation();
   const { businessUnitLookups } = useBusinessUnit();
   const { businessUnitTypeLookups } = useBusinessUnitType();
 
@@ -44,15 +51,15 @@ export const BusinessUnitDialog = ({ onClose ,title,businessUnit}: { onClose: ()
         ? updateBusinessUnit({
             updateBusinessUnitCommand: values,
           })
-          :
-      addBusinessUnit({
-        createBusinessUnitCommand: values,
-      }))
+        : addBusinessUnit({
+            createBusinessUnitCommand: values,
+          })
+      )
         .unwrap()
-        .then(()=>{onClose();
+        .then(() => {
+          onClose();
           window.location.reload();
-          }
-        )
+        });
     },
     [onClose, addBusinessUnit]
   );
@@ -82,24 +89,23 @@ export const BusinessUnitDialog = ({ onClose ,title,businessUnit}: { onClose: ()
                 )} */}
 
                 <Grid item xs={12}>
-                <Box sx={{ display: "flex", gap: 2 }}>
-                  <FormTextField
-                    name="name"
-                    label="Business Unit Name"
-                    type="text"
-                  />
+                  <Box sx={{ display: "flex", gap: 2 }}>
+                    <FormTextField
+                      name="name"
+                      label="Business Unit Name"
+                      type="text"
+                    />
                     <FormSelectField
                       name="type"
                       label="Business Unit Type "
                       type="number"
                       options={businessUnitTypeLookups}
                     />
-                    </Box>
+                  </Box>
                 </Grid>
                 <Grid item xs={12}>
                   <Box sx={{ display: "flex", gap: 2 }}>
-                  
-                                        <FormSelectField
+                    <FormSelectField
                       name="parentId"
                       label="Parent Business Unit"
                       type="number"
@@ -112,23 +118,22 @@ export const BusinessUnitDialog = ({ onClose ,title,businessUnit}: { onClose: ()
                     />
                   </Box>
                 </Grid>
-                
+
                 <Grid item xs={12}>
-                 <Box sx={{ display: "flex", gap: 2 }}>
+                  <Box sx={{ display: "flex", gap: 2 }}>
                     <FormTextField
                       name="areaCode"
                       label="Business Unit Area Code"
                       type="text"
                     />
 
-                  <FormTextField
+                    <FormTextField
                       name="address"
                       label="Business Unit Address"
                       type="text"
                     />
-         
                   </Box>
-                  </Grid>
+                </Grid>
               </Grid>
             </DialogContent>
             <DialogActions sx={{ p: 2 }}>

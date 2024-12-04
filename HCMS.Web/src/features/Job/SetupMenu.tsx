@@ -87,7 +87,7 @@ const SetupMenu = () => {
           >
             <WorkIcon sx={{ fontSize: 15, color: "#FA500" }} />
             <Typography variant="h6" sx={{ mt: 1 }}>
-              New Job 
+              New Job
             </Typography>
           </Paper>
         </Grid>
